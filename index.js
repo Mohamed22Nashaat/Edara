@@ -8,15 +8,21 @@ const cors = require("cors");
 app.use(cors());
 
 
+// End Points
 
-const auth = require("./routes/Auth");
-const products = require("./routes/products");
-const warehouse = require("./routes/Warehouse");
+const login = require("./routes/LoginRouter");
+const products = require("./routes/ProductRouter");
+const warehouse = require("./routes/WarehouseRouter");
+const user = require("./routes/UserRouter");
+const request = require("./routes/RequestRouter");
 
+app.use("/login",login);
+app.use("/products",products);
+app.use("/warehouse",warehouse);
+app.use("/user",user);
+app.use("/request",request);
+
+// Listening
 app.listen(5000,"localhost", ()=>{
     console.log("SERVER IS RUNINNG");
 });
-  
-app.use("/auth",auth);
-app.use("/products",products);
-app.use("/warehouse",warehouse);
