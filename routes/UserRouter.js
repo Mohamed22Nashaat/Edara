@@ -27,11 +27,7 @@ router.post("/",
             [req.body.email]
         );
         if(user.length)
-            return res.status(400).json({
-                errors:{
-                    "msg":"Email already exists",
-                }
-            });
+            return res.status(400).json({errors:{"msg":"Email already exists"}});
 /* Prepare to Save*/
         const userInfo = {
             name: req.body.name,
@@ -60,12 +56,15 @@ router.put("/:id",
                 "SELECT * FROM users WHERE id = ?",
                 req.params.id
             );
-            if(!user[0]) 
-                return res.status(400).json({
-                    errors:{
-                        "msg":"User doesn't exist..",
-                    }
-                });
+            if(!user[0]) return res.status(400).json({errors:{"msg":"User doesn't exist.."}});
+               
+            if(req.body.warehouseID){
+                const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?', req.body.warehouseID);
+                if(checkWarehouse[0].supervisorID) return res.status(400).json({ errors:{"msg":"Warehouse Already Occupied "}});
+
+                await query('UPDATE warehouses SET supervisorID = NULL WHERE supervisorID = ?', user[0].id);
+                await query('UPDATE warehouses SET supervisorID = ? WHERE id = ?', [user[0].id, req.body.warehouseID]);
+            }
             const userInfo = {
                 name: req.body.name? req.body.name: user[0].name,
                 phone: req.body.phone? req.body.phone: user[0].phone,
@@ -73,8 +72,7 @@ router.put("/:id",
                 warehouseID: req.body.warehouseID? req.body.warehouseID: user[0].warehouseID
             };
             await query('UPDATE users SET ?  WHERE id = ?',[userInfo, user[0].id]);
-            res.status(200).json('Updated..');
-            
+            res.status(200).json('Updated..');            
         }catch(err){
             console.log(err);
             res.status(500).json({err: err});
@@ -86,16 +84,9 @@ router.delete("/:id",
         async (req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
-        const user = await query(
-            "SELECT * FROM users WHERE id = ?",
-            req.params.id
-        );
-        if(!user[0]) 
-            return res.status(400).json({
-                errors:{
-                    "msg":"User doesn't exist..",
-                }
-            });
+        const user = await query("SELECT * FROM users WHERE id = ?",req.params.id);
+        if(!user[0]) return res.status(400).json({errors:{"msg":"User doesn't exist..",}});
+
         await query('DELETE FROM `users` WHERE `id` = ?', user[0].id);
         res.status(200).json("Deleted..");
     }catch(err){
@@ -109,9 +100,7 @@ router.get("/",
         async (req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
-        const user = await query(
-            "SELECT * FROM users WHERE role != 'admin'"
-        );
+        const user = await query("SELECT * FROM users WHERE role != 'admin'");
         
         for(i in user){
             delete user[i].password;
@@ -128,16 +117,10 @@ router.get("/:id",
         async (req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
-        const user = await query(
-            "SELECT * FROM users WHERE id = ?",
-            req.params.id
-        );
+        const user = await query("SELECT * FROM users WHERE id = ?", req.params.id );
         if(!user[0]) 
-            return res.status(400).json({
-                errors:{
-                    "msg":"User doesn't exist..",
-                }
-            });
+            return res.status(400).json({errors:{"msg":"User doesn't exist.."}});
+
         delete user[0].password;
         res.status(200).json(user[0]);
     }catch(err){
