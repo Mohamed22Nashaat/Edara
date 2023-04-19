@@ -1,9 +1,12 @@
 const router = require('express').Router();
-const conn = require ("../db/dbConnection");
+const util = require ("util");
+const {body, validationResult} = require('express-validator');
+
 const authenticate = require("../middleware/authentication");
 const authorize = require("../middleware/authorization");
-const {body, validationResult} = require('express-validator');
-const util = require ("util");
+
+const conn = require ("../db/dbConnection");
+
 
 // authorize [CREATE, UPDATE, DELETE, LIST]
 router.post("/",

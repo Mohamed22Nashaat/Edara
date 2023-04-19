@@ -1,7 +1,6 @@
 const conn = require ("../db/dbConnection");
 const util = require ("util");
 
-
 const authentication =async (req, res, next) =>{
     try{
         const query = util.promisify(conn.query).bind(conn);

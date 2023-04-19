@@ -1,20 +1,26 @@
 const router = require('express').Router();
-const conn = require ("../db/dbConnection");
+const util = require ("util");
+
 const authenticate = require("../middleware/authentication");
 const authorize = require("../middleware/authorization");
-const {body, validationResult} = require('express-validator');
-const upload = require('../middleware/uploadImages');
-const util = require ("util");
+
+const conn = require ("../db/dbConnection");
 
 // authorize [CREATE, UPDATE, DELETE, LIST]
 router.post("/", 
         authorize,
         async (req, res) =>{
     try{
-        const errors = validationResult(req);
-        if (!errors.isEmpty())
-             res.status(400).json({errors:errors.array ()});
-        if(!req.file) return res.status(400).json({errors:{"msg":"Image Required"}});
+        const query = util.promisify(conn.query).bind(conn);
+
+        const checkProduct = await query('SELECT * FROM products WHERE id = ?',req.body.productID);
+        if(!checkProduct[0]) return res.status(404).json({msg: "Product not found"});
+        
+        const checkUser = await query('SELECT * FROM users WHERE id = ?',req.body.userID);
+        if(!checkUser[0] || checkUser[0].status != 'active') return res.status(404).json({msg: "User not found"});
+        
+        const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?',req.body.warehouseID);
+        if(!checkWarehouse[0] || checkWarehouse[0].status != 'active') return res.status(404).json({msg: "Warehouse not found"});
 
         const request = {
             productID: req.body.productID,
@@ -22,7 +28,6 @@ router.post("/",
             userID: req.body.userID,
             warehouseID: req.body.warehouseID,
         };    
-        const query = util.promisify(conn.query).bind(conn);
         await query('INSERT INTO `requests` SET ?', request);
         res.status(200).json({msg: "request created"});
 
@@ -100,6 +105,9 @@ router.get("/userRequests/:id",
         async(req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
+        const checkUser = await query('SELECT * FROM users WHERE id = ?',req.params.id); 
+        if(!checkUser[0]) return res.status(404).json({msg: "User not found"});
+    
         const requests = await query('SELECT * FROM `requests` WHERE userID = ?',req.params.id);
         res.status(200).json(requests);
     }catch(err){
@@ -113,6 +121,9 @@ router.get("/warehouseRequests/:id",
         async(req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
+        const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?',req.params.id); 
+        if(!checkWarehouse[0]) return res.status(404).json({msg: "Warehouse not found"});
+        
         const requests = await query('SELECT * FROM `requests` WHERE warehouseID = ?',req.params.id);
         res.status(200).json(requests);
     }catch(err){

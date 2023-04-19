@@ -1,25 +1,19 @@
 const router = require('express').Router();
-const conn = require ("../db/dbConnection");
+const fs = require('fs');
+const util = require ("util");
+
 const authenticate = require("../middleware/authentication");
 const authorize = require("../middleware/authorization");
-const {body, validationResult} = require('express-validator');
 const upload = require('../middleware/uploadImages');
-const util = require ("util");
-const fs = require('fs');
+
+const conn = require ("../db/dbConnection");
 
 // authorize [CREATE, UPDATE, DELETE, LIST]
 router.post("/", 
         authorize,
         upload.single('image'),
         async (req, res) =>{
-    try{
-        const errors = validationResult(req);
-        if (!errors.isEmpty()){
-            fs.unlinkSync('./public/' + req.file.filename);
-            return res.status(400).json({errors:errors.array ()});
-        }
-            
-            
+    try{    
         if(!req.file) {
             fs.unlinkSync('./public/' + req.file.filename);
             return res.status(400).json({errors:{"msg":"Image Required"}});
@@ -127,6 +121,7 @@ router.get("/warehouseProducts/:id",
         const query = util.promisify(conn.query).bind(conn);
         const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?',req.params.id); 
         if(!checkWarehouse[0]) return res.status(404).json({msg: "Warehouse not found"});
+
         const products = await query('SELECT * FROM `products` WHERE warehouseID = ?',req.params.id);
         res.status(200).json(products);
     }catch(err){
