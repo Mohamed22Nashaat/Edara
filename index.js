@@ -17,9 +17,9 @@ const user = require("./routes/UserRouter");
 const request = require("./routes/RequestRouter");
 
 app.use("/login",login);
-app.use("/products",products);
-app.use("/warehouse",warehouse);
 app.use("/user",user);
+app.use("/warehouse",warehouse);
+app.use("/products",products);
 app.use("/request",request);
 
 // Listening

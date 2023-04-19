@@ -9,7 +9,7 @@ const authentication =async (req, res, next) =>{
         if(!token) return res.status(403).json({msg: "sorry you must login first"});
 
         const user = await query("SELECT * FROM users WHERE token = ? ", token);
-        if(!user[0]) return res.status(403).json({msg: "you are not authorized to access this route !"});
+        if(!user[0] || user[0].status != 'active') return res.status(403).json({msg: "you are not authorized to access this route !"});
         
         next();
     }catch(err){

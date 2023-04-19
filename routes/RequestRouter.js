@@ -2,7 +2,7 @@ const router = require('express').Router();
 const conn = require ("../db/dbConnection");
 const authenticate = require("../middleware/authentication");
 const authorize = require("../middleware/authorization");
-const { body } = require('express-validator');
+const {body, validationResult} = require('express-validator');
 const upload = require('../middleware/uploadImages');
 const util = require ("util");
 
