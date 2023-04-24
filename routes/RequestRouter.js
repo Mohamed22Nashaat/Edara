@@ -50,6 +50,7 @@ router.put("/:id",
         let userIDNew = req.body.userID  ? req.body.userID : request[0].userID ;
         let warehouseIDNew = req.body.warehouseID ? req.body.warehouseID : request[0].warehouseID;
         let statusNew = req.body.status ? req.body.status : request[0].status;
+        
         const requestNew = {
             productID: productIDNew,
             quantity: quantityNew,
