@@ -1,0 +1,46 @@
+
+.stock-form{
+    width: 70%;
+    margin: auto;
+    display: flex;
+}
+
+
+::-webkit-input-placeholder {
+    color: white;
+}
+
+.stock-form .input-quantity{
+  
+    width: 70px;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color:rgb(215, 233, 207) ;
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: black;
+    font-size: 16px;
+    height: 25px;
+    
+}
+.stock-form .input-quantity:focus{
+    transform: scale(1.1);
+}
+
+.stock-form button{
+    margin: 20px 7px;
+    font-size: 18px;
+    background-color:rgb(119, 168, 42) ;
+    color: white;
+    padding:5px 12px ;
+    border-radius: 5px;
+    border: 0;
+    
+}
+
+.stock-form button:hover{
+    background-color: rgba(120, 168, 42, 0.527);
+    cursor: pointer;
+}
