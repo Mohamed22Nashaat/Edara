@@ -22,7 +22,7 @@ const user = require("./routes/UserRouter");
 const request = require("./routes/RequestRouter");
 
 app.use("/login",login);
-app.use("/user",user);
+app.use("/users",user);
 app.use("/warehouse",warehouse);
 app.use("/products",products);
 app.use("/request",request);
@@ -41,7 +41,7 @@ app.get("/homess",
         console.log(err);
         res.status(500).json({err: err});
     }
-})
+});
 
 // Listening
 app.listen(5000,"localhost", ()=>{
