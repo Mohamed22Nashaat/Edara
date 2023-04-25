@@ -1,0 +1,94 @@
+.background {
+    background-image: url("../assets/images/img5.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+ justify-content: center;
+    height: 1000px;
+    margin-top: 100px;
+ 
+
+}
+.parent{
+    margin-top: 150px;
+    text-align: center;
+    background-color: #77889994;
+    width: 500px;
+    height: 800px;
+    border-radius: 10px;
+
+}
+.parent h1{
+    margin-bottom: 30px;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 30px;
+    color: white;
+}
+.parent form{
+    height: 100%;
+}
+.parent form .one label {
+
+    display: block;
+    color: white;
+    margin-bottom: 15px;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.parent form .two label {
+    color: white;
+    display: block;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+.parent form .two  input{
+    border-radius: 5px;
+
+    height: 25px;
+    width: 400px;
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: #77889926;
+}
+.parent form .three label {
+    color: white;
+    display: block;
+    margin-left: 30px;
+
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+.parent form .three  input{
+    border-radius: 5px;
+
+    height: 25px;
+    width: 400px;
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: #77889926;
+}
+.parent form .che input{
+   height: 25px;
+   width: 20px;
+    }
+.parent form .che label{
+font-size:30px ;
+}
+.parent form .che label a{
+    text-decoration: none;
+    }
+.parent form .singup button{
+    border-radius: 25px;
+    height: 65px;
+    width: 300px;
+   
+    text-align: center;
+    color: black;
+    background-color: white;
+    font-size: 22px;
+}

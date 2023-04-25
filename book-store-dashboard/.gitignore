@@ -1,12 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/api/node_modules
-/hala/node_modules
-/Edara-final/node_modules
-/book-store-dashboard/node_modules
+/node_modules
 /.pnp
 .pnp.js
+/book-store-dashboard/node_modules
 
 # testing
 /coverage

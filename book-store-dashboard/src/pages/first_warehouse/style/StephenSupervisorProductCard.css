@@ -1,0 +1,92 @@
+.stephen-supurvisor-product-card{
+    width: 40%;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 15px;
+    height: 280px;
+    background-color: rgb(111, 128, 163);
+    display: flex;
+    padding: 10px;
+    
+    
+}
+.stephen-supurvisor-product-card-title{
+    text-align: center;
+    font-weight: bold;
+    color:rgb(9, 3, 56) ;
+    
+
+}
+.stephen-supurvisor-product-card-desc{
+    color: rgb(9, 3, 56); ;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.stephen-supurvisor-product-card-info{
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+.stephen-supurvisor-product-card-image img{
+    height: 100%;
+    width: 150px;
+    object-fit: cover;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.stephen-supurvisor-product-card-image{
+    width: 100%;
+    height: 272px;
+}
+
+
+.stephen-supurvisor-product-card-main-info{
+    height: 225px;
+}
+
+.stephen-stock .stephen-number-stock{
+    width: 50px;
+    padding: 7px;
+    border-radius: 2px;
+    background-color: rgb(193, 190, 190);
+}
+
+
+
+.stephen-stock .stephen-request{
+    padding: 7px;
+    border-radius: 2px;
+    background-color: rgb(131, 217, 18);
+    margin-left:5px ;
+}
+
+.stephen-stock .stephen-request:hover{
+    background-color:rgba(131, 217, 18, 0.529) ;
+    cursor: pointer;
+}
+
+.stephen-stock{
+    display: flex;
+}
+
+.stephen-stock h3{
+    margin-left: 50px;
+    color:rgb(9, 3, 56) ;
+}
+
+.stephen-stock form{
+    margin-left: 25px;
+}
+
+.stock{
+    display: flex;
+    /* margin: 0 0 10px 0; */
+    margin-bottom: 20px;
+
+}
+.stock h3{
+    margin-right: 50px ;
+}

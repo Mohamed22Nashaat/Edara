@@ -1,0 +1,35 @@
+.william-supervisor-product-list{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: aliceblue ;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.william-supervisor-history-buttonn{
+
+    margin: 100px 100px;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: rgb(177, 97, 17);
+    
+    
+    border: 0;
+    color: white;
+    text-decoration: none;
+ } 
+
+.william-supervisor-history-buttonn:hover{
+    background-color: rgba(177, 97, 17, 0.808);
+    cursor: pointer;
+}
+
+.william-supervisor-history-button{
+    background-color: aliceblue ;
+    height: 30px;
+}

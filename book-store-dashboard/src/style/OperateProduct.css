@@ -1,0 +1,210 @@
+
+.add-product{
+    min-height: 653px;
+    background-color: rgb(249, 226, 199);
+    
+    
+}
+.add-form{
+    width: 70%;
+    margin: auto;
+}
+
+.add-form h1{
+    text-align: center;
+    text-transform: uppercase;
+    padding: 30px 0 10px 0;
+    color: rgb(55, 34, 9);
+}
+
+
+.add-form .input{
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: rgb(155, 107, 53);
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+}
+.add-form .input:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+
+}
+
+::-webkit-input-placeholder {
+    color: white;
+}
+
+.add-form textarea{
+    height: 90px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color:rgb(155, 107, 53) ;
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+}
+
+.add-form textarea:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+
+}
+
+.add-form .input-quantity{
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color:rgb(155, 107, 53) ;
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+}
+.add-form .input-quantity:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+}
+
+
+
+.add-form button{
+    margin: 20px 7px;
+    font-size: 18px;
+    background-color:rgb(55, 34, 9) ;
+    color: white;
+    padding:5px 12px ;
+    border-radius: 5px;
+    border: 0;
+}
+
+.add-form button:hover{
+    background-color: rgb(104, 72, 36);
+    cursor: pointer;
+}
+.reset{
+    margin: 20px 7px;
+    font-size: 18px;
+    background-color:rgb(55, 34, 9) ;
+    color: white;
+    padding:5px 12px ;
+    border-radius: 5px;
+    border: 0;
+    width: 90px;
+}
+
+.reset:hover{
+    background-color: rgb(104, 72, 36);
+    cursor: pointer;
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////// */
+
+.stephen-edit-product{
+    /* background-color: aliceblue ; */
+    background-color: rgb(249, 226, 199);
+    min-height: 653px;
+    
+}
+.stephen-edit-form{
+    width: 70%;
+    margin: auto;
+}
+
+.stephen-edit-form h1{
+    text-align: center;
+    text-transform: uppercase;
+    padding: 30px 0 10px 0;
+    color: rgb(55, 34, 9);
+}
+
+.stephen-edit-form label{
+    font-size: 20px;
+    font-weight: bold;
+}
+.stephen-edit-form .stephen-input{
+  
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: rgb(155, 107, 53);
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+}
+
+.stephen-edit-form .stephen-input:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+
+}
+
+.stephen-edit-form textarea{
+
+    height: 90px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color:rgb(155, 107, 53) ;
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+}
+
+.stephen-edit-form textarea:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+
+}
+
+
+.stephen-edit-form button{
+
+    margin: 20px 7px;
+    font-size: 18px;
+    background-color:rgb(55, 34, 9) ;
+    color: white;
+    padding:5px 12px ;
+    border-radius: 5px;
+    border: 0;
+}
+
+.stephen-edit-form button:hover{
+    background-color: rgb(104, 72, 36);
+    cursor: pointer;
+}
+
+.stephen-edit-form  .stephen-input-quantity{
+
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color:rgb(155, 107, 53) ;
+    margin: 4px 0;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-size: 16px;
+    
+} 
+.stephen-edit-form .stephen-input-quantity:focus{
+    background-color: rgb(104, 72, 36);
+    transform: scale(1.1);
+}

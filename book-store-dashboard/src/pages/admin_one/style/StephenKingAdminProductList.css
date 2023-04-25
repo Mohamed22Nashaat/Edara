@@ -1,0 +1,66 @@
+.stephen-king-admin-product-list{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* background-color: aliceblue ; */
+    background-color: rgb(249, 226, 199);
+    padding-bottom: 50px;
+}
+
+.stephen-king-add-buttonn{
+    margin: 100px 100px;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    /* background-color: rgb(177, 97, 17); */
+    background-color:rgb(111, 31, 222);
+
+    
+    border: 0;
+    color: white;
+    text-decoration: none;
+}
+
+.stephen-king-add-buttonn:hover{
+    /* background-color: rgba(177, 97, 17, 0.808); */
+    background-color:rgba(111, 31, 222, 0.441);
+    cursor: pointer;
+}
+
+.stephen-king-add-button{
+    /* background-color: aliceblue ; */
+    background-color: rgb(249, 226, 199);
+    height: 40px;
+}
+
+
+
+.stephen-history-buttonn{
+
+    margin: 100px 100px;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    /* background-color: rgb(177, 97, 17); */
+    background-color:rgb(111, 31, 222);
+    
+    
+    border: 0;
+    color: white;
+    text-decoration: none;
+}
+
+.stephen-history-buttonn:hover{
+    /* background-color: rgba(177, 97, 17, 0.808); */
+    background-color:rgba(111, 31, 222, 0.441);
+    cursor: pointer;
+}
+
+.stephen-history-button{
+    /* background-color: aliceblue ; */
+    background-color: rgb(249, 226, 199);
+    height: 70px;
+}
