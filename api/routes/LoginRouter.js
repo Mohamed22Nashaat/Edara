@@ -26,7 +26,7 @@ router.post("/",
     const checkpassword = await bcrypt.compare(req.body.password,user[0].password);
     if(!checkpassword) return res.status(404).json({errors: [{msg: "not correct email or password !"}]});
     
-    res.header("x-auth-token", user[0].token);
+    res.header("token", user[0].token);
     delete user[0].password;
     res.status(200).json(user[0]);
 
