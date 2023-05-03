@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const {body, validationResult} = require("express-validator");
-const util = require ("util");
-const bcrypt =require("bcrypt");
 
-const conn = require ("../db/dbConnection");
+const User = require ('../models/user');
 
 router.post("/",    
     body("email")
@@ -17,18 +15,13 @@ router.post("/",
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({errors:errors.array ()});
 
-    const query = util.promisify(conn.query).bind(conn); 
-    /* check Existance*/
-    const user = await query ("SELECT * FROM users WHERE email = ? ",req.body.email);
-    if(user.length == 0) return res.status(404).json({errors: [{msg: "not correct email or password !" }]});
+    let userModel = new User();
+    let user = await userModel.Login(req.body.email, req.body.password);
 
-    /* check Password*/
-    const checkpassword = await bcrypt.compare(req.body.password,user[0].password);
-    if(!checkpassword) return res.status(404).json({errors: [{msg: "not correct email or password !"}]});
+    if(user.err) return res.status(404).json(user);
     
-    res.header("token", user[0].token);
-    delete user[0].password;
-    res.status(200).json(user[0]);
+    res.header("token", user.token);
+    res.status(200).json(user);
 
   }catch (err) {
     res.status(500).json({err:err});
