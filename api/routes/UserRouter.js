@@ -94,7 +94,7 @@ router.get("/:id",
         async (req, res) => {
     try{
         const user = await userModel.GetUser(req.params.id);
-        if(!user) 
+        if(user.err) 
             return res.status(404).json(user);
 
         res.status(200).json(user);

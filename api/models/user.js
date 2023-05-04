@@ -49,8 +49,8 @@ module.exports = class User{
 
     async UpdateUser(oldID, newInfo){
         
-        let userCheck = await query("SELECT * FROM users WHERE id = ?", oldID);
-        if(!userCheck[0]) 
+        let user = await query("SELECT * FROM users WHERE id = ?", oldID);
+        if(!user[0]) 
             return {
                 err : "User doesn't exist.."
             };
@@ -66,25 +66,25 @@ module.exports = class User{
                     err:"Warehouse Already Occupied "
                 };
 
-            await query('UPDATE warehouses SET supervisorID = NULL WHERE supervisorID = ?', userCheck[0].id);
-            await query('UPDATE warehouses SET supervisorID = ? WHERE id = ?', [userCheck[0].id, newInfo.warehouseID]);
+            await query('UPDATE warehouses SET supervisorID = NULL WHERE supervisorID = ?', user[0].id);
+            await query('UPDATE warehouses SET supervisorID = ? WHERE id = ?', [user[0].id, newInfo.warehouseID]);
         }
 
         if(newInfo.status == 'inactive'){
-            await query('UPDATE warehouses SET supervisorID = NULL WHERE supervisorID = ?', userCheck[0].id);
-            await query('UPDATE users SET warehouseID = NULL WHERE id = ?', userCheck[0].id);
+            await query('UPDATE warehouses SET supervisorID = NULL WHERE supervisorID = ?', user[0].id);
+            await query('UPDATE users SET warehouseID = NULL WHERE id = ?', user[0].id);
         }
 
-        userCheck = await query("SELECT * FROM users WHERE id = ?", oldID);
+        user = await query("SELECT * FROM users WHERE id = ?", oldID);
         const userInfo = {
-            name: newInfo.name? newInfo.name: userCheck[0].name,
-            phone: newInfo.phone? newInfo.phone: userCheck[0].phone,
-            status: newInfo.status? newInfo.status: userCheck[0].status,
+            name: newInfo.name? newInfo.name: user[0].name,
+            phone: newInfo.phone? newInfo.phone: user[0].phone,
+            status: newInfo.status? newInfo.status: user[0].status,
         };
-        await query('UPDATE users SET ?  WHERE id = ?',[userInfo, userCheck[0].id]);
+        await query('UPDATE users SET ?  WHERE id = ?',[userInfo, user[0].id]);
         
-        userCheck = await query("SELECT * FROM users WHERE id = ?", oldID);
-        return userCheck[0];    
+        user = await query("SELECT * FROM users WHERE id = ?", oldID);
+        return user[0];    
     }
 
     async DeleteUser(id){
