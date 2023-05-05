@@ -148,4 +148,18 @@ router.get("/:id",
     }
 });
 
+router.get("/",
+        async (req, res)=>{
+    try{
+        const query = util.promisify(conn.query).bind(conn);
+        const requests = await query('SELECT * FROM `requests` ');
+
+        res.status(200).json(requests);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({err: err});
+    }
+});
+    
+
 module.exports = router;
