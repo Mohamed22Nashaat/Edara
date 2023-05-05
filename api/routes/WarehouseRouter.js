@@ -1,11 +1,9 @@
 const router = require('express').Router();
-const util = require ("util");
 const {body, validationResult} = require('express-validator');
 
 const authenticate = require("../middleware/authentication");
 const authorize = require("../middleware/authorization");
 
-const conn = require ("../db/dbConnection");
 const Warehouse = require ('../models/warehouse');
 let warehouseModel = new Warehouse();
 

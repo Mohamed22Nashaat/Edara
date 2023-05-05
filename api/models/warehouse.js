@@ -1,6 +1,4 @@
 const util = require ("util");
-const bcrypt =require("bcrypt");
-const crypto = require('crypto');
 
 const conn = require ("../db/dbConnection");
 const query = util.promisify(conn.query).bind(conn);

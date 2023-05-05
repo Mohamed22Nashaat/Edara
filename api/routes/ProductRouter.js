@@ -7,6 +7,8 @@ const authorize = require("../middleware/authorization");
 const upload = require('../middleware/uploadImages');
 
 const conn = require ("../db/dbConnection");
+const Product = require ('../models/product');
+let productModel = new Product();
 
 // authorize [CREATE, UPDATE, DELETE, LIST]
 router.post("/", 
@@ -14,26 +16,15 @@ router.post("/",
         upload.single('image'),
         async (req, res) =>{
     try{    
-        if(!req.file) {
-            fs.unlinkSync('./public/' + req.file.filename);
-            return res.status(400).json({errors:{"msg":"Image Required"}});
-        }
-        const query = util.promisify(conn.query).bind(conn);
-        
-        const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?', req.body.warehouseID);
-        if(!checkWarehouse[0]){
-            fs.unlinkSync('./public/' + req.file.filename);
-            return res.status(400).json({errors:{"msg":"Warehouse Doesn't Exist.."}});
-        } 
-        const product = {
-            name: req.body.name,
-            stock: req.body.stock,
-            description: req.body.description?req.body.description : 'null',
-            warehouseID: req.body.warehouseID,
-            photo: req.file.filename,
-        };
-        await query('INSERT INTO `products` SET ?', product);
-        res.status(200).json({msg: "product created"});
+        let productInfo = req.body;
+        productInfo.file = req.file;
+
+        let product = await productModel.AddProduct(productInfo);
+
+        if(product.err)
+            return res.status(400).json(product);
+
+        res.status(200).json(product);
 
     }catch(err){
         fs.unlinkSync('./public/' + req.file.filename);
@@ -47,34 +38,15 @@ router.put("/:id",
         upload.single('image'),
         async (req, res) => {
     try{
-        const query = util.promisify(conn.query).bind(conn);
-        const product = await query('SELECT * FROM `products` WHERE id =?', req.params.id);
+        const oldID = req.params.id;
+        const newInfo = req.body;
+        newInfo.file = req.file;
+        
+        const updatedInfo = await productModel.UpdateProduct(oldID, newInfo);
+        if(updatedInfo.err) 
+            return res.status(404).json(updatedInfo);
 
-        if(!product[0]) {
-            fs.unlinkSync('./public/' + req.file.filename);
-            return res.status(404).json({msg: "product not found"});
-        }
-
-        let nameNew = req.body.name ? req.body.name : product[0].name;
-        let descriptionNew = req.body.description ? req.body.description : product[0].description;
-        let stockNew = req.body.stock ? req.body.stock : product[0].stock;
-        let warehouseIDNew = req.body.warehouseID ? req.body.warehouseID : product[0].warehouseID;
-        let photoNew;
-        if(req.file){
-            photoNew = req.file.filename ;
-            fs.unlinkSync('./public/' + product[0].photo);
-        }else{
-            photoNew = product[0].photo;
-        }
-        const productNew = {
-            name: nameNew,
-            description: descriptionNew,
-            stock: stockNew,
-            warehouseID: warehouseIDNew,
-            photo: photoNew,
-        };
-        await query('UPDATE `products` SET ? WHERE `id` = ?',[productNew, product[0].id]);
-        res.status(200).json({msg: "product updated"});
+        res.status(200).json(updatedInfo);
     }catch(err){
         fs.unlinkSync('./public/' + req.file.filename);
         console.log(err);
