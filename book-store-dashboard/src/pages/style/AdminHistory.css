@@ -1,0 +1,32 @@
+.stephen-king-history{
+    /* margin: 20px 100px; */
+    /* background-color: rgb(4, 4, 92); */
+    background-color: rgb(104, 72, 36);
+    padding:50px 100px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.stephen-king-history-table{
+    margin: 30px 80px;
+    
+}
+.head{
+    padding: 50px;
+}
+.stephen-king-history-table td{
+    padding: 5px 50px;
+    border: solid 1px black;
+}
+table{
+    font-weight: bold;
+    font-size: 18px;
+    
+}
+#stephen-history-button{
+    background-color: rgb(9, 3, 56);
+    
+    width: 85px;
+    padding:2px 5px;
+    border-radius: 5px;
+}

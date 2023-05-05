@@ -6,6 +6,7 @@ import axios from "axios";
 import { setAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
 
+//login
  const Login = () => {
   const navigate = useNavigate();
     const [login, setLogin] = useState({
@@ -26,7 +27,7 @@ import { useNavigate } from "react-router-dom";
         setLogin({ ...login, loading: false, err: [] });
         setAuthUser(resp.data);
         navigate("/dashboard");
-
+        window.location.reload()
       })
       .catch((errors) => {
         setLogin({
@@ -72,7 +73,7 @@ return (
         </div>
         <br />
         <div class="che">
-          <input id="check" type="checkBox" />
+          <input id="check" type="checkBox" required />
           <label for="check">I agree all statements in <Link href="">terms of services</Link></label>
         </div>
         <br />

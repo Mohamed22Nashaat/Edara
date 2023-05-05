@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import '../style/NewWarehouse.css';
 
-//new warehouse
-const NewWarehouse  = () =>{
+// update warehouse
+const UpdateWarehouse  = () =>{
 
 
   const [values, setValues]= useState({
     
     name :"",
-    location : ""
+    location : "",
+    status : ""
     
 })
 
@@ -35,7 +35,7 @@ const submit =(event)=>{
         .then(res => {
             console.log(res);
             console.log(user)
-            setValues({name:"" ,location: "" })
+            setValues({name:"" ,location: "" ,status: ""})
             navigate('/ManageWarehouse')
 
         })
@@ -49,7 +49,7 @@ console.log(values);
        <div className="new-wrapper">
         <div className='add-product'>
             <div className='add-form'>
-            <h1 style={{marginBottom:"60px"}}>Add  New Warehouse</h1>
+            <h1 style={{marginBottom:"60px"}}>Update  New Warehouse</h1>
 
             <form onSubmit={(e)=>submit(e)}>
                 <div>
@@ -62,7 +62,7 @@ console.log(values);
 
                 
 
-                <button type='submit'>Add</button>
+                <button type='submit'>Update</button>
                 <input className='reset' type="reset" value={"Reset"}/>
             </form>
             </div>
@@ -72,4 +72,4 @@ console.log(values);
   )
 }
 
-export default NewWarehouse;
+export default UpdateWarehouse;

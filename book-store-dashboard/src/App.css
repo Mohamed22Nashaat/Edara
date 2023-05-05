@@ -2,8 +2,8 @@
 
 body{
   font-family: 'DM Sans', sans-serif;
-font-family: 'Padauk', sans-serif;
-background: rgb(204, 188, 160);
+  font-family: 'Padauk', sans-serif;
+  background: rgb(173, 157, 128);
 }
 :root {
   --yellow: linear-gradient(180deg, #F8D49A -146.42%, #FAD79D -46.42%);

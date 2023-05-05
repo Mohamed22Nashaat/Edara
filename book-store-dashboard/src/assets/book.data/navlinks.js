@@ -2,7 +2,7 @@ const navlinks =[
     {
         path:"/dashboard",
         icon: "ri-apps-2-line",
-        display:"dashboard",
+        display:"Dashboard",
     },
     {
         path:"/NewWarehouse",
@@ -17,12 +17,22 @@ const navlinks =[
     {
         path:"/Login",
         icon: "ri-settings-2-line",
-        display:"login",
+        display:"Login",
     },
     {
         path:"/homess",
         icon: "ri-settings-2-line",
         display:"Manage Supervisor",
+    },
+    {
+        path:"Manage Supervisor",
+        icon: "ri-settings-2-line",
+        display:"Update Supervisor",
+    },
+    {
+        path:"/history",
+        icon: "ri-settings-2-line",
+        display:"History",
     },
 
 ];

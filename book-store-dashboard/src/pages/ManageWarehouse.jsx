@@ -1,13 +1,13 @@
 import React, {useEffect, useState, alert} from "react";
 import Table from 'react-bootstrap/Table';
 import { Link } from "react-router-dom";
-import '../style/homess.css';
 import axios from 'axios';
 
-function Home_sup() {
+//show warehouse
+function ManageWarehouse() {
     const [data, setData]= useState([])
     useEffect(()=>{
-        axios.get('http://localhost:4000/')
+        axios.get('http://localhost:4000/warehouse/Warehouse')
         .then(res => setData(res.data))
         .catch(err => console.log(err));
 
@@ -25,16 +25,15 @@ function Home_sup() {
               <div className="style-home">
        <div className="header">
         <div className="w-70 bg-white rounded p-3">
-            <h2> Manage Supervisore </h2>
-            <Link to={'/NewSuper'} className="btn btn-sm btn-danger"> Add New Supervisore + </Link>
+            <h2> Manage Warehouse </h2>
+            <Link to={'/NewWarehouse'} className="btn btn-sm btn-danger"> Add New Warehouse + </Link>
             </div>
             <Table striped bordered hover size="sm" >
                 <thead>
                     <tr >
                         <th>id</th>
                         <th> name</th>
-                        <th> email</th>
-                        <th> Phone</th>
+                        <th> location</th>
                         <th> status</th>
                         <th> actions</th>
                     </tr>
@@ -44,12 +43,11 @@ function Home_sup() {
                         return<tr key={index}>
                             <td> {users.id}</td>
                             <td> {users.name}</td>
-                            <td> {users.email}</td>
-                            <td> {users.Phone}</td>
+                            <td> {users.location}</td>
                             <td> {users.status}</td>
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
-                <Link to={`/UpdateSupervisore/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
+                <Link to={`/UpdateWarehouse/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
                 </td>
                 </tr>
                     })}
@@ -63,4 +61,4 @@ function Home_sup() {
     );
   }
   
-  export default Home_sup;
+  export default ManageWarehouse;

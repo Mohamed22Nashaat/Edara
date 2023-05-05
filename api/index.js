@@ -44,6 +44,6 @@ app.get("/homess",
 });
 
 // Listening
-app.listen(5000,"localhost", ()=>{
+app.listen(4000,"localhost", ()=>{
     console.log("SERVER IS RUNINNG");
 });

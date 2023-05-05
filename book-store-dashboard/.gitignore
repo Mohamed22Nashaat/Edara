@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/book-store-dashboard/node_modules
 
 # testing
 /coverage

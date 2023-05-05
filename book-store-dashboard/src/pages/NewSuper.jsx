@@ -4,23 +4,24 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-
-
-const NewSuper = () =>{
+//add supervisor
+const NewSuper  = () =>{
 
 
   const [values, setValues]= useState({
     
     name :"",
-    email : "",
-    password : "",
-    phone : ""
-    
+    email: "",
+    phone: "",
+    status: "" 
     
 })
 
+const [user , setuser] = useState(JSON.parse(localStorage.getItem("user")))
+console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
+  const v = {}
   setValues ({ ...values, [name]: value });
   };
 
@@ -29,14 +30,53 @@ const navigate = useNavigate();
 
 const submit =(event)=>{
   event.preventDefault();
-  axios.post('http://localhost:4000/user/',values )
+  
+  axios.post('http://localhost:4000/users/',values ,{
+    headers: {
+      'Authorization': 'Bearer ' + user.token
+    }})
         .then(res => {
             console.log(res);
-            navigate('/Home_sup')
+            console.log(user)
+            setValues({name:"" ,email: "",phone: "",status: "" })
+            navigate('/homess')
 
         })
         .catch(err => console.log(err))
+        
 }
+
+// function NewSuper (){
+
+
+//   const [values, setValues]= useState({
+    
+//     name :"",
+//     email : "",
+//     phone : "",
+//     password : ""
+   
+    
+    
+// })
+
+//const handleInputChange = (event) => {
+  //const { name, value } = event.target;
+  //setValues ({ ...values, [name]: value });
+  //};
+
+
+// const navigate = useNavigate();
+
+// const submit =(event)=>{
+//   event.preventDefault();
+//   axios.post('http://localhost:4000/users', values)
+//         .then(res => { 
+//           console.log(res)
+//           navigate('/homess')
+//         })
+//        .catch(err => console.log(err))
+// }
 
 
 return(
@@ -47,33 +87,30 @@ return(
             <div className='add-form'>
 <h1 style={{marginBottom:"60px", color:"rgb(9, 3, 56)"}}>Add New Supervisor</h1>
 
+{/* <form onSubmit={(e)=>submit(e)}> */}
 <form onSubmit={submit}>
 
 <div>
-<input className='input'  type='text' placeholder='Enter Name'  name='name' required value={values.name}  onChange={handleInputChange } />
+<input className='input'  type='text' placeholder='Enter Name'  name='name' required value={values.name}  
+onChange={e=> setValues({...values, name : e.target.value})}/>
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Email' name='email' required value={values.email} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter Email' name='email' required value={values.email} 
+onChange={e=> setValues({...values, email : e.target.value})}/>
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Phone' name='phone' required value={values.phone} onChange={handleInputChange }
+<input className='input' type='text'  placeholder='Enter Phone' name='phone' required value={values.phone}
+  onChange={e=> setValues({...values, phone : e.target.value})}
  />
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Password' name='password' required value={values.password} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter Status' name='status' required value={values.status} 
+onChange={e=> setValues({...values, status : e.target.value})}
+/>
 </div>
-
-
-
-
-
-
-
-
-
 <button type='submit' >Add </button>
 <input className='reset' type="reset" value={"Reset"}/>
 

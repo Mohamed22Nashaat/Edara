@@ -3,14 +3,15 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import '../style/NewWarehouse.css';
 
-//new warehouse
-const NewWarehouse  = () =>{
+const UpdateProduct  = () =>{
 
 
   const [values, setValues]= useState({
     
     name :"",
-    location : ""
+    stock : "",
+    photo : "",
+    description : "",
     
 })
 
@@ -28,16 +29,15 @@ const navigate = useNavigate();
 const submit =(event)=>{
   event.preventDefault();
   
-  axios.post('http://localhost:4000/warehouse/',values ,{
+  axios.post('http://localhost:4000/products/',values ,{
     headers: {
       'Authorization': 'Bearer ' + user.token
     }})
         .then(res => {
             console.log(res);
             console.log(user)
-            setValues({name:"" ,location: "" })
-            navigate('/ManageWarehouse')
-
+            setValues({name:"" ,stock: "",photo: "",description: "" })
+            navigate('/ManageProduct')
         })
         .catch(err => console.log(err))
         
@@ -45,11 +45,11 @@ const submit =(event)=>{
 
 console.log(values);
   return (
-    <div className="NewWarehouse">
+    <div className="NewProduct">
        <div className="new-wrapper">
         <div className='add-product'>
             <div className='add-form'>
-            <h1 style={{marginBottom:"60px"}}>Add  New Warehouse</h1>
+            <h1 style={{marginBottom:"60px"}}>Update  New Product</h1>
 
             <form onSubmit={(e)=>submit(e)}>
                 <div>
@@ -57,10 +57,16 @@ console.log(values);
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Location' name='location' required value={values.location} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter Location' name='stock' required value={values.stock} onChange={handleInputChange }/>
 </div>
 
-                
+<div>
+ <input className='input' type='file' placeholder='image' name='stock' required value={values.photo} onChange={handleInputChange  }  />
+                </div>
+                <div>
+<input className='input' type='text'  placeholder='Enter description' name='stock' required value={values.description} onChange={handleInputChange }/>
+</div>
+
 
                 <button type='submit'>Add</button>
                 <input className='reset' type="reset" value={"Reset"}/>
@@ -72,4 +78,4 @@ console.log(values);
   )
 }
 
-export default NewWarehouse;
+export default UpdateProduct;

@@ -6,6 +6,8 @@ import BookStatsChart from '../charts/BookStatsChart'
 import RecommendBookCard from '../components/Ui/RecommendBookCard'
 import recommedBook from '../assets/book.data/recommend-book'
 import { Link } from 'react-router-dom'
+import { getAuthUser } from "../helper/Storage"
+const auth = getAuthUser();
 const bookObj = {
   title:'Total Books',
   totalnumber:"750+",
@@ -46,18 +48,18 @@ const Dashboard = () => {
               <h3 className='stats_title'>Book Statistics</h3>
               <BookStatsChart/>
             </div>
-            <div className="boton">
-              <Link to="/NewSuper" className='create'>New Warehouse +</Link>
-            </div>
-            <div className="boton2">
-              <Link to='/NewWarehouse' className='create-sup'> New supervisor +</Link>
-            </div> 
+           
+            {/* {auth && auth.role === "admin" &&( <div className="boton">
+            
+               <Link to="/NewWarehouse" className='create'>New Warehouse +</Link>
+             
+            </div>)} */}
           </div>
-          <div className="recommend_books-wrapper">
+          {/* <div className="recommend_books-wrapper">
            {
             recommedBook.map((item)=> (<RecommendBookCard item={item} key={item.id}/>))
            }
-          </div>
+          </div> */}
       </div>
     </div>
   )

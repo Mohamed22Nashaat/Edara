@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import '../style/NewWarehouse.css';
 
-//new warehouse
-const NewWarehouse  = () =>{
+import '../style/NewWarehouse.css';
+const AppProduct  = () =>{
 
 
   const [values, setValues]= useState({
@@ -25,6 +24,7 @@ const handleInputChange = (event) => {
 
 const navigate = useNavigate();
 
+// add warehouse
 const submit =(event)=>{
   event.preventDefault();
   
@@ -36,7 +36,6 @@ const submit =(event)=>{
             console.log(res);
             console.log(user)
             setValues({name:"" ,location: "" })
-            navigate('/ManageWarehouse')
 
         })
         .catch(err => console.log(err))
@@ -45,11 +44,11 @@ const submit =(event)=>{
 
 console.log(values);
   return (
-    <div className="NewWarehouse">
+    <div className="NewProduct">
        <div className="new-wrapper">
         <div className='add-product'>
             <div className='add-form'>
-            <h1 style={{marginBottom:"60px"}}>Add  New Warehouse</h1>
+            <h1 style={{marginBottom:"60px"}}>Add  New Product</h1>
 
             <form onSubmit={(e)=>submit(e)}>
                 <div>
@@ -57,10 +56,16 @@ console.log(values);
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Location' name='location' required value={values.location} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter Location' name='stock' required value={values.stock} onChange={handleInputChange }/>
 </div>
 
-                
+<div>
+ <input className='input' type='file' placeholder='image' name='stock' required value={values.photo} onChange={handleInputChange  }  />
+                </div>
+                <div>
+<input className='input' type='text'  placeholder='Enter description' name='stock' required value={values.description} onChange={handleInputChange }/>
+</div>
+
 
                 <button type='submit'>Add</button>
                 <input className='reset' type="reset" value={"Reset"}/>
@@ -72,4 +77,4 @@ console.log(values);
   )
 }
 
-export default NewWarehouse;
+export default AppProduct;

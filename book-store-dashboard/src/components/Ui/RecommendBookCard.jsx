@@ -1,6 +1,9 @@
-import React from 'react';
-
+import React ,{useState}from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuthUser } from "../../helper/Storage";
+const auth = getAuthUser();
 const RecommendBookCard = (props) => {
+  const navigate = useNavigate()
     const {language,imgUrl,percentage} = props.item
   return (
     <div className="recommend_book-card">
@@ -10,14 +13,17 @@ const RecommendBookCard = (props) => {
                 <i class="ri-store-line"></i>
             </span>
            Warehouse {percentage} </h5>
-           <div className="select-option">
+           {auth && auth.role === "admin"&&(<div className="select-option">
             <select>
              <option value="None">None</option>
               <option value="EDIT">Edit</option>
-              <option value="Show">Show</option>
               <option value="DELETE">Delete</option>
             </select>
-           </div>
+           </div>)}
+           
+    </div>
+    <div>
+    <button className='warebutton' onClick={() =>navigate('/AdminProductList')}>Show</button>
     </div>
     <div className="recommend_book-img">
       <img src={imgUrl} alt="" />

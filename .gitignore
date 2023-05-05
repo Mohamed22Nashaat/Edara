@@ -2,9 +2,8 @@
 
 # dependencies
 /api/node_modules
-/hala/node_modules
-/Edara-final/node_modules
 /book-store-dashboard/node_modules
+/api/db/dbConnection.js
 /.pnp
 .pnp.js
 
