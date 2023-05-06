@@ -59,6 +59,7 @@ function ManageWarehouse() {
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
                 <Link to={`/UpdateWarehouse/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
+                <Link to={`/UserProductList/${users.id}`} className="btn btn-sm btn-danger"> view </Link>
                 </td>
                 </tr>
                     })}

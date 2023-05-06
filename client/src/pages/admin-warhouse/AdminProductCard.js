@@ -3,11 +3,11 @@ import '../style/AdminProductCard.css';
 import { Link } from 'react-router-dom';
 
  const AdminProductCard = (props) =>{
-    
+    // {'/assets/products/'+props.image} 
     return(
         <div className="stephen-king-admin-product-card">
             <div className="stephen-king-admin-product-card-image">
-                <img src={props.img}></img>
+               <img src={'../assets/products/'+props.img}></img>
             </div>
 
             <div className="stephen-king-admin-product-card-info">

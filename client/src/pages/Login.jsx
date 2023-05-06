@@ -72,10 +72,7 @@ return (
           />
         </div>
         <br />
-        <div class="che">
-          <input id="check" type="checkBox" required />
-          <label for="check">I agree all statements in <Link href="">terms of services</Link></label>
-        </div>
+        
         <br />
         <div class="singup">
           <button className="btn btn-dark w-100"

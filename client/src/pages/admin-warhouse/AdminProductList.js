@@ -6,11 +6,30 @@ import AdminHistory from "./AdminHistory";
 import AdminAddButton from "./AdminAddButton";
 import AdminHistoryButton from "./AdminHistoryButton";
 
+import { useParams } from "react-router-dom";
+import { getAuthUser } from "../../helper/Storage";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const AdminProductList = () =>{
 
+    const {warehouseID} = useParams();
+    const user = getAuthUser();
 
-    const items = Data;
+    const [data, setData]= useState([])
+    useEffect(()=>{
+        axios.get('/products/warehouseProducts/'+warehouseID,{
+            headers:{
+                'token': user.token
+            } 
+        })
+        .then(res => setData(res.data))
+        .catch(err => console.log(err));
 
+},[])
+
+
+    const items = data;
 
     const displayBooks =()=>{
         if(items.length === 0){
@@ -24,7 +43,7 @@ const AdminProductList = () =>{
                 name={item.name}
                 desc={item.description}
                 img={item.image}
-                quantity={item.quantity}
+                quantity={item.stock}
                 id={item.id}
                 />
                 

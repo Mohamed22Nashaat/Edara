@@ -31,7 +31,7 @@ const Router = () => {
     <Route path='/history' element={<History/>}/>
     <Route path='/add' element={<AddProduct/>}/>
     <Route path='/edit' element={<EditProduct/>}/>
-    <Route path='/adminProductList' element={<AdminProductList/>}/>
+    <Route path='/adminProductList/:warehouseID' element={<AdminProductList/>}/>
     <Route path='/userProductList' element={<UserProductList/>}/>
     <Route path='/UserProductCard' element={<UserProductCard/>}/>
     <Route path='/UpdateSupervisore/:id' element={<UpdateSupervisore/>}/>
