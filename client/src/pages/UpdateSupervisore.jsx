@@ -99,11 +99,11 @@ const navigate = useNavigate();
               </div>
 
               <div>
-                <input className='input' type='text'  placeholder='Enter status' name='status' required value={values.password}
-                onChange={e=> setValues({...values, password : e.target.value})}/>
+                <input className='input' type='text'  placeholder='Enter status' name='status' required value={values.status}
+                onChange={e=> setValues({...values, status : e.target.value})}/>
               </div>
 
-              <button type='submit' >Add </button>
+              <button type='submit' >Save </button>
               <input className='reset' type="reset" value={"Reset"}/>
 
             </form>

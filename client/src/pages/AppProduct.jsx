@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
 import '../style/NewWarehouse.css';
 import { getAuthUser } from '../helper/Storage';
+
 const AppProduct  = () =>{
 
   const user = getAuthUser();
