@@ -29,7 +29,7 @@ module.exports = class Product{
             stock: productInfo.stock,
             description: productInfo.description ? productInfo.description : 'null',
             warehouseID: productInfo.warehouseID,
-            photo: productInfo.file.filename,
+            image: productInfo.file.filename,
         };
         await query('INSERT INTO `products` SET ?', product);
         return {
@@ -61,12 +61,12 @@ module.exports = class Product{
                 
         }
 
-        let photoNew;
+        let imageNew;
         if(newInfo.file){
-            photoNew = newInfo.file.filename ;
-            fs.unlinkSync('./public/' + product[0].photo);
+            imageNew = newInfo.file.filename ;
+            fs.unlinkSync('./public/' + product[0].image);
         }else{
-            photoNew = product[0].photo;
+            imageNew = product[0].image;
         }
 
         let productInfo = {
@@ -74,7 +74,7 @@ module.exports = class Product{
             description: newInfo.description ? newInfo.description : product[0].description,
             stock: newInfo.stock ? newInfo.stock : product[0].stock,
             warehouseID: newInfo.warehouseID ? newInfo.warehouseID : product[0].warehouseID,
-            photo: photoNew,
+            image: imageNew,
         }
       
         await query('UPDATE `products` SET ? WHERE `id` = ?',[productInfo, product[0].id]);

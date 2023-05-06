@@ -3,9 +3,11 @@ import '../style/NewSuper.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { getAuthUser } from '../helper/Storage';
 
 //add supervisor
 const NewSuper  = () =>{
+  const user = getAuthUser();
 
 
   const [values, setValues]= useState({
@@ -13,17 +15,15 @@ const NewSuper  = () =>{
     name :"",
     email: "",
     phone: "",
-    status: "" 
+    password: "" 
     
 })
 
-const [user , setuser] = useState(JSON.parse(localStorage.getItem("user")))
-console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
   const v = {}
   setValues ({ ...values, [name]: value });
-  };
+};
 
 
 const navigate = useNavigate();
@@ -31,19 +31,20 @@ const navigate = useNavigate();
 const submit =(event)=>{
   event.preventDefault();
   
-  axios.post('http://localhost:4000/users/',values ,{
-    headers: {
-      'Authorization': 'Bearer ' + user.token
-    }})
-        .then(res => {
-            console.log(res);
-            console.log(user)
-            setValues({name:"" ,email: "",phone: "",status: "" })
-            navigate('/homess')
+  axios.post(
+    '/users/',
+    values ,
+    {
+      headers: {
+        'token': user.token
+    }
+    }).then(res => {
+        console.log(res);
+        console.log(user)
+        // setValues({name:"" ,email: "",phone: "",password: "" })
+        navigate('/homess')
 
-        })
-        .catch(err => console.log(err))
-        
+      }).catch(err => console.log(err)) 
 }
 
 // function NewSuper (){
@@ -70,7 +71,7 @@ const submit =(event)=>{
 
 // const submit =(event)=>{
 //   event.preventDefault();
-//   axios.post('http://localhost:4000/users', values)
+//   axios.post('/users', values)
 //         .then(res => { 
 //           console.log(res)
 //           navigate('/homess')
@@ -107,8 +108,8 @@ onChange={e=> setValues({...values, email : e.target.value})}/>
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Status' name='status' required value={values.status} 
-onChange={e=> setValues({...values, status : e.target.value})}
+<input className='input' type='password'  placeholder='Enter Password' name='password' required value={values.password} 
+onChange={e=> setValues({...values, password : e.target.value})}
 />
 </div>
 <button type='submit' >Add </button>

@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
         e.preventDefault();
         setLogin({ ...login, loading: true, err: [] });
         axios
-      .post("http://localhost:4000/login", {
+      .post("/login", {
         email: login.email,
         password: login.password,
       })

@@ -18,8 +18,9 @@ router.post("/",
     try{    
         let productInfo = req.body;
         productInfo.file = req.file;
-
         let product = await productModel.AddProduct(productInfo);
+
+        console.log(req.file);
 
         if(product.err)
             return res.status(400).json(product);
@@ -63,7 +64,7 @@ router.delete("/:id",
 
         if(!product[0]) return res.status(404).json({msg: "product not found"});
 
-        fs.unlinkSync('./public/' + product[0].photo);
+        fs.unlinkSync('./public/' + product[0].image);
         await query('DELETE FROM `products` WHERE `id` = ?', product[0].id);
 
         res.status(200).json({msg: "product deleted"});

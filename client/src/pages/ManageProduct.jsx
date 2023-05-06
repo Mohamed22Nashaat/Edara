@@ -2,21 +2,32 @@ import React, {useEffect, useState, alert} from "react";
 import Table from 'react-bootstrap/Table';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { getAuthUser } from "../helper/Storage";
 
 function ManageProduct() {
     const [data, setData]= useState([])
     useEffect(()=>{
-        axios.get('http://localhost:4000/products/products')
+        axios.get('/products',
+        {
+            headers:{
+                'token': getAuthUser().token
+            }
+        })
         .then(res => setData(res.data))
         .catch(err => console.log(err));
 
 },[])
    const handleDelete = (id) => {
-    axios.delete('http://localhost:4000/users'+id)
-    .then(res =>
-        {
-            alert('record has delete');
-        })
+    axios.delete('/products/'+id,
+    {
+        headers:{
+            'token': getAuthUser().token
+        }
+    })
+    .then(res => {
+        console.log(res)
+        window.location.reload();
+    })
     .catch(err => console.log(err));
 
    }
@@ -35,6 +46,7 @@ function ManageProduct() {
                         <th> stock</th>
                         <th> photo</th>
                         <th> description</th>
+                        <th> warehouseID</th>
                         <th> actions</th>
                     </tr>
                 </thead>
@@ -44,8 +56,9 @@ function ManageProduct() {
                             <td> {users.id}</td>
                             <td> {users.name}</td>
                             <td> {users.stock}</td>
-                            <td> {users.photo}</td>
+                            <td> {users.image}</td>
                             <td> {users.description}</td>
+                            <td> {users.warehouseID}</td>
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
                 <Link to={`/UpdateProduct/${users.id}`} className="btn btn-sm btn-danger"> update </Link>

@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import '../style/NewWarehouse.css';
+import { getAuthUser } from '../helper/Storage';
 
 const UpdateProduct  = () =>{
-
+  const {id} = useParams(); 
 
   const [values, setValues]= useState({
     
     name :"",
     stock : "",
-    photo : "",
+    image : "",
     description : "",
+    warehouseID : "",
     
 })
 
-const [user , setuser] = useState(JSON.parse(localStorage.getItem("user")))
-console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
   const v = {}
@@ -29,14 +29,13 @@ const navigate = useNavigate();
 const submit =(event)=>{
   event.preventDefault();
   
-  axios.post('http://localhost:4000/products/',values ,{
+  axios.put('/products/'+id,values ,{
     headers: {
-      'Authorization': 'Bearer ' + user.token
+      'token':getAuthUser().token
     }})
         .then(res => {
             console.log(res);
-            console.log(user)
-            setValues({name:"" ,stock: "",photo: "",description: "" })
+            setValues({name:"" ,stock: "",image: "",description: "" ,warehouseID: "" })
             navigate('/ManageProduct')
         })
         .catch(err => console.log(err))
@@ -57,14 +56,17 @@ console.log(values);
 </div>
 
 <div>
-<input className='input' type='text'  placeholder='Enter Location' name='stock' required value={values.stock} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter Stock' name='stock' required value={values.stock} onChange={handleInputChange }/>
 </div>
 
 <div>
- <input className='input' type='file' placeholder='image' name='stock' required value={values.photo} onChange={handleInputChange  }  />
+ <input className='input' type='file' placeholder='image' name='image' required value={values.image} onChange={handleInputChange  }  />
                 </div>
                 <div>
-<input className='input' type='text'  placeholder='Enter description' name='stock' required value={values.description} onChange={handleInputChange }/>
+<input className='input' type='text'  placeholder='Enter description' name='description' required value={values.description} onChange={handleInputChange }/>
+</div>
+<div>
+<input className='input' type='text'  placeholder='Enter WarehouseID' name='warehouseID' required value={values.warehouseID} onChange={handleInputChange }/>
 </div>
 
 

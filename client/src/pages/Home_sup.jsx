@@ -1,23 +1,33 @@
 import React, {useEffect, useState, alert} from "react";
 import Table from 'react-bootstrap/Table';
 import { Link } from "react-router-dom";
+import '../style/homess.css';
+import {getAuthUser} from '../helper/Storage';
 import axios from 'axios';
 
-//show warehouse
-function ManageWarehouse() {
+function Home_sup() {
+    const userLocal = getAuthUser();
+
     const [data, setData]= useState([])
     useEffect(()=>{
-        axios.get('http://localhost:4000/warehouse/Warehouse')
+        axios.get('/users',{
+            headers:{
+                'token': userLocal.token
+            } 
+        })
         .then(res => setData(res.data))
         .catch(err => console.log(err));
 
 },[])
    const handleDelete = (id) => {
-    axios.delete('http://localhost:4000/users'+id)
-    .then(res =>
-        {
-            alert('record has delete');
-        })
+    axios.delete('/users/'+id,
+    {headers:{
+        'token': userLocal.token
+    }})
+    .then(res =>{
+        console.log(res);
+        window.location.reload();
+    })
     .catch(err => console.log(err));
 
    }
@@ -25,15 +35,16 @@ function ManageWarehouse() {
               <div className="style-home">
        <div className="header">
         <div className="w-70 bg-white rounded p-3">
-            <h2> Manage Warehouse </h2>
-            <Link to={'/NewWarehouse'} className="btn btn-sm btn-danger"> Add New Warehouse + </Link>
+            <h2> Manage Supervisore </h2>
+            <Link to={'/NewSuper'} className="btn btn-sm btn-danger"> Add New Supervisore + </Link>
             </div>
             <Table striped bordered hover size="sm" >
                 <thead>
                     <tr >
                         <th>id</th>
                         <th> name</th>
-                        <th> location</th>
+                        <th> email</th>
+                        <th> Phone</th>
                         <th> status</th>
                         <th> actions</th>
                     </tr>
@@ -43,11 +54,12 @@ function ManageWarehouse() {
                         return<tr key={index}>
                             <td> {users.id}</td>
                             <td> {users.name}</td>
-                            <td> {users.location}</td>
+                            <td> {users.email}</td>
+                            <td> {users.Phone}</td>
                             <td> {users.status}</td>
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
-                <Link to={`/UpdateWarehouse/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
+                <Link to={`/UpdateSupervisore/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
                 </td>
                 </tr>
                     })}
@@ -61,4 +73,4 @@ function ManageWarehouse() {
     );
   }
   
-  export default ManageWarehouse;
+  export default Home_sup;

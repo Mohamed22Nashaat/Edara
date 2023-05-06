@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import '../style/NewWarehouse.css';
+import { getAuthUser } from "../helper/Storage";
 
-// update warehouse
-const UpdateWarehouse  = () =>{
+//new warehouse
+const NewWarehouse  = () =>{
 
 
   const [values, setValues]= useState({
     
     name :"",
-    location : "",
-    status : ""
+    location : ""
     
 })
 
-const [user , setuser] = useState(JSON.parse(localStorage.getItem("user")))
+const [user , setuser] = useState(getAuthUser())
 console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
@@ -28,14 +29,18 @@ const navigate = useNavigate();
 const submit =(event)=>{
   event.preventDefault();
   
-  axios.post('http://localhost:4000/warehouse/',values ,{
-    headers: {
-      'Authorization': 'Bearer ' + user.token
-    }})
-        .then(res => {
+  axios.post(
+      '/warehouse',
+      values ,
+      {
+        headers: {
+          'token': user.token
+        }
+      }
+      ).then(res => {
             console.log(res);
             console.log(user)
-            setValues({name:"" ,location: "" ,status: ""})
+            setValues({name:"" ,location: "" })
             navigate('/ManageWarehouse')
 
         })
@@ -49,7 +54,7 @@ console.log(values);
        <div className="new-wrapper">
         <div className='add-product'>
             <div className='add-form'>
-            <h1 style={{marginBottom:"60px"}}>Update  New Warehouse</h1>
+            <h1 style={{marginBottom:"60px"}}>Add  New Warehouse</h1>
 
             <form onSubmit={(e)=>submit(e)}>
                 <div>
@@ -62,7 +67,7 @@ console.log(values);
 
                 
 
-                <button type='submit'>Update</button>
+                <button type='submit'>Add</button>
                 <input className='reset' type="reset" value={"Reset"}/>
             </form>
             </div>
@@ -72,4 +77,4 @@ console.log(values);
   )
 }
 
-export default UpdateWarehouse;
+export default NewWarehouse;

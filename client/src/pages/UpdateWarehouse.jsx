@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
-import '../style/NewWarehouse.css';
+import { useNavigate, useParams } from "react-router-dom";
+import { getAuthUser } from "../helper/Storage";
 
-//new warehouse
-const NewWarehouse  = () =>{
+// update warehouse
+const UpdateWarehouse  = () =>{
 
-
+  const {id} = useParams(); 
   const [values, setValues]= useState({
     
     name :"",
-    location : ""
+    location : "",
+    status : ""
     
 })
 
-const [user , setuser] = useState(JSON.parse(localStorage.getItem("user")))
+const user = getAuthUser();
+
 console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
@@ -28,14 +30,21 @@ const navigate = useNavigate();
 const submit =(event)=>{
   event.preventDefault();
   
-  axios.post('http://localhost:4000/warehouse/',values ,{
-    headers: {
-      'Authorization': 'Bearer ' + user.token
-    }})
+  axios.put(
+    '/warehouse/'+id,
+    values ,
+    {headers: {
+        'token': user.token
+      },
+      body:
+        values
+      
+      
+    })
         .then(res => {
             console.log(res);
             console.log(user)
-            setValues({name:"" ,location: "" })
+            setValues({name:"" ,location: "" ,status: ""})
             navigate('/ManageWarehouse')
 
         })
@@ -49,7 +58,7 @@ console.log(values);
        <div className="new-wrapper">
         <div className='add-product'>
             <div className='add-form'>
-            <h1 style={{marginBottom:"60px"}}>Add  New Warehouse</h1>
+            <h1 style={{marginBottom:"60px"}}>Update  New Warehouse</h1>
 
             <form onSubmit={(e)=>submit(e)}>
                 <div>
@@ -62,7 +71,7 @@ console.log(values);
 
                 
 
-                <button type='submit'>Add</button>
+                <button type='submit'>Update</button>
                 <input className='reset' type="reset" value={"Reset"}/>
             </form>
             </div>
@@ -72,4 +81,4 @@ console.log(values);
   )
 }
 
-export default NewWarehouse;
+export default UpdateWarehouse;

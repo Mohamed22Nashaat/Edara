@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "edra_dashboard",
+    database: "project backend",
     port: "3306",
 });
 connection.connect((err)=>{
