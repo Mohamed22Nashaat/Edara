@@ -4,6 +4,7 @@ import navLinks from '../../assets/book.data/navlinks';
 import "./SideBar.css";
 import { removeAuthUser, getAuthUser } from "../../helper/Storage";
 import { useNavigate, } from "react-router-dom";
+import HistoryUser from './../../pages/HistoryUser';
 const Sidebar = () => {
   const navigate = useNavigate();
   const auth = getAuthUser();
@@ -62,6 +63,40 @@ const Sidebar = () => {
                 </NavLink>
               </li>
             )} */}
+
+            
+{auth && auth.role === "user" && (
+              <li className='nav_item' >
+                <NavLink
+                  to={"/UserProductList"}>
+                  <i className="ri-settings-2-line"></i>
+                  "Home"
+                </NavLink>
+              </li> 
+            )}
+
+            
+ {auth && auth.role === "user" && (
+              <li className='nav_item' >
+                <NavLink
+                  to={"/HistoryUser"}>
+                  <i className="ri-settings-2-line"></i>
+                  "HistoryUser"
+                </NavLink>
+              </li> 
+            )}
+
+
+{auth && auth.role === "user" && (
+              <li className='nav_item' >
+                <NavLink
+                  to={"/HistoryUser"}>
+                  <i className="ri-settings-2-line"></i>
+                  "HistoryUser"
+                </NavLink>
+              </li>
+            )}
+
 
 
             {auth && auth.role === "admin" && (

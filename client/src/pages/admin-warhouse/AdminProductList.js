@@ -26,7 +26,7 @@ const AdminProductList = () =>{
         .then(res => setData(res.data))
         .catch(err => console.log(err));
 
-},[])
+        },[])
 
 
 

@@ -3,13 +3,32 @@ import UserProductCard from "./UserProductCard";
 import UserHistoryButton from "./UserHistoryButton";
 import UserHistory from "./UserHistory";
 import './style/UserProductList.css';
+import { useParams } from "react-router-dom";
+import { getAuthUser } from "../../helper/Storage";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 const UserProductList = () =>{
 
+    const {warehouseID} = useParams();
+    const user = getAuthUser();
 
-    const items = Data;
+    const [data, setData]= useState([])
+    useEffect(()=>{
+        axios.get('/products/warehouseProducts/'+warehouseID,{
+            headers:{
+                'token': user.token
+            } 
+        })
+        .then(res => setData(res.data))
+        .catch(err => console.log(err));
 
+        },[])
+
+
+
+    const items = data;
 
     const displayBooks =()=>{
         if(items.length === 0){
@@ -35,9 +54,9 @@ const UserProductList = () =>{
 return (
     <>
     
-    <UserHistoryButton/>
+    {/* <UserHistoryButton/> */}
     <div className="stephen-supervisor-product-list">{displayBooks()}</div>
-    <UserHistory/>
+    {/* <UserHistory/> */}
     </>
 )
 

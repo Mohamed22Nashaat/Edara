@@ -17,6 +17,8 @@ import UpdateWarehouse from '../pages/UpdateWarehouse';
 import ManageProduct from '../pages/ManageProduct';
 import AppProduct from '../pages/AppProduct';
 import UpdateProduct from '../pages/UpdateProduct';
+import HistoryUser from '../pages/HistoryUser';
+
 const Router = () => {
   return(
   <Routes>
@@ -32,7 +34,7 @@ const Router = () => {
     <Route path='/add' element={<AddProduct/>}/>
     <Route path='/edit' element={<EditProduct/>}/>
     <Route path='/adminProductList/:warehouseID' element={<AdminProductList/>}/>
-    <Route path='/userProductList' element={<UserProductList/>}/>
+    <Route path='/userProductList/:warehouseID' element={<UserProductList/>}/>
     <Route path='/UserProductCard' element={<UserProductCard/>}/>
     <Route path='/UpdateSupervisore/:id' element={<UpdateSupervisore/>}/>
     <Route path='/NewSuper' element={<NewSuper/>}/>
@@ -41,6 +43,8 @@ const Router = () => {
     <Route path='/ManageProduct' element={<ManageProduct/>}/>
     <Route path='/AppProduct' element={<AppProduct/>}/>
     <Route path='/UpdateProduct/:id' element={<UpdateProduct/>}/>
+    <Route path='/HistoryUser' element={<HistoryUser/>}/>
+  
   </Routes>
   )
 }

@@ -7,14 +7,14 @@ export const Data =[
         image: "https://m.media-amazon.com/images/I/41ksNxnzTIL._SX322_BO1,204,203,200_.jpg",
         quantity:10,
     },
-    {
-        id:2 ,
-        name:"The Green Mile",
-        description: 
-        "Welcome to Cold Mountain Penitentiary, home to the Depression-worn men of E Block. Convicted killers all, each awaits his turn to walk “the Green Mile,” the lime-colored linoleum corridor leading to a final meeting with Old Sparky, Cold Mountain’s electric chair. Prison guard Paul Edgecombe has seen his share of oddities over the years working the Mile ,but he’s never seen anything like John Coffey—a man with the body of a giant and the mind of a child",
-        image: "https://m.media-amazon.com/images/I/51UeX4DyGiL._SX320_BO1,204,203,200_.jpg",
-        quantity:25,
-    },
+    // {
+    //     id:2 ,
+    //     name:"The Green Mile",
+    //     description: 
+    //     "Welcome to Cold Mountain Penitentiary, home to the Depression-worn men of E Block. Convicted killers all, each awaits his turn to walk “the Green Mile,” the lime-colored linoleum corridor leading to a final meeting with Old Sparky, Cold Mountain’s electric chair. Prison guard Paul Edgecombe has seen his share of oddities over the years working the Mile ,but he’s never seen anything like John Coffey—a man with the body of a giant and the mind of a child",
+    //     image: "https://m.media-amazon.com/images/I/51UeX4DyGiL._SX320_BO1,204,203,200_.jpg",
+    //     quantity:25,
+    // },
     {
         id:3 ,
         name:"The Institute",

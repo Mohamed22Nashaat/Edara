@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
     return(
         <div className="stephen-king-admin-product-card">
             <div className="stephen-king-admin-product-card-image">
-               <img src={'../assets/products/'+props.img}></img>
+               <img src={props.img}></img>
             </div>
 
             <div className="stephen-king-admin-product-card-info">

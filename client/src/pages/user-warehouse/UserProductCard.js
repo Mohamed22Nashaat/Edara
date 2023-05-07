@@ -21,9 +21,9 @@ import './style/UserProductCard.css';
                 
 
                     <div className="stock">
+                    
+                    <h3>Quantity= {props.quantity}</h3>
                     <Stock/>
-                    <h3>Quantity = {props.quantity}</h3>
-
                     </div>
 
             </div>
