@@ -26,11 +26,18 @@ const Sidebar = () => {
         <div className="menu">
           <ul className='nav_list'>
             {!auth && (
+
               <li className='nav_item' >
                 <NavLink
                   to={"/Login"}>
+
                   <i className="ri-settings-2-line"></i>
                   "Login"
+
+                  
+                  
+            
+
                 </NavLink>
               </li>
             )
@@ -148,6 +155,11 @@ const Sidebar = () => {
                   to={"/history"}>
                   <i className="ri-settings-2-line"></i>
                   "Requests"
+
+                  <span className='notification'>
+            <i class="ri-notification-3-line"></i>
+            <span className='badge-r'></span>
+            </span>
                 </NavLink>
               </li>
             )}

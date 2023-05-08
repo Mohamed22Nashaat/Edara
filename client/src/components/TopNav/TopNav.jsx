@@ -11,7 +11,9 @@ const TopNav = () => {
           <input type="text" placeholder="search ot type" />
           <span><i class="ri-search-line"></i></span>
         </div> */}
-        <div className="top_nav-right">
+
+
+        {/* <div className="top_nav-right">
           <span className='notification'>
             <i class="ri-notification-3-line"></i>
             <span className='badge'>1</span>
@@ -21,7 +23,9 @@ const TopNav = () => {
                 <img src={profileimg} alt="" />
                 </Link>
             </div>
-        </div>
+        </div> */}
+
+        
       </div>
     </div>
   )
