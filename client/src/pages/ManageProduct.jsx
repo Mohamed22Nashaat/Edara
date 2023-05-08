@@ -10,9 +10,7 @@ function ManageProduct() {
     const user = getAuthUser();
     const navigate = useNavigate();
     
-    if(!user || user.role !== 'admin'){
-      navigate('/');
-    }
+    
 
     useEffect(()=>{
         axios.get('/products',

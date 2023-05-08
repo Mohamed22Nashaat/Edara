@@ -5,9 +5,9 @@ import BookChart from '../charts/BookChart'
 import BookStatsChart from '../charts/BookStatsChart'
 import RecommendBookCard from '../components/Ui/RecommendBookCard'
 import recommedBook from '../assets/book.data/recommend-book'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getAuthUser } from "../helper/Storage"
-const auth = getAuthUser();
+
 const bookObj = {
   title:'Total Books',
   totalnumber:"750+",
@@ -30,6 +30,10 @@ const warehouse = {
 }
 
 const Dashboard = () => {
+  const user = getAuthUser();
+    const navigate = useNavigate();
+  
+    
   return (
     
     <div className="dashboard">

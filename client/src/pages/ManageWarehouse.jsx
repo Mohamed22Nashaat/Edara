@@ -9,9 +9,7 @@ function ManageWarehouse() {
     const navigate = useNavigate();
     const user = getAuthUser();
 
-    if(!user || user.role !== 'admin'){
-        navigate('/');
-      }
+    
       
     const [data, setData]= useState([])
     useEffect(()=>{

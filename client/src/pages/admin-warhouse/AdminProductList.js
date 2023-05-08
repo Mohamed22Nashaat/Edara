@@ -6,7 +6,7 @@ import AdminHistory from "./AdminHistory";
 import AdminAddButton from "./AdminAddButton";
 import AdminHistoryButton from "./AdminHistoryButton";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAuthUser } from "../../helper/Storage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -15,7 +15,9 @@ const AdminProductList = () =>{
 
     const {warehouseID} = useParams();
     const user = getAuthUser();
-
+    const navigate = useNavigate();
+  
+    
     const [data, setData]= useState([]);
     const [history, setHistory]= useState([]);
     useEffect(()=>{

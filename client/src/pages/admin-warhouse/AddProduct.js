@@ -11,9 +11,7 @@ const AddProduct = () =>{
     const user = getAuthUser();
     const navigate = useNavigate();
     
-    if(!user || user.role !== 'admin'){
-      navigate('/');
-    }
+   
 
     const [image, setImage]= useState("");
     const [title, setTitle]= useState("");

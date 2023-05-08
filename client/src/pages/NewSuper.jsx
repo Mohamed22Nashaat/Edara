@@ -10,9 +10,7 @@ const NewSuper  = () =>{
   const user = getAuthUser();
   const navigate = useNavigate();
   
-  if(!user || user.role !== 'admin'){
-    navigate('/');
-  }
+  
 
   const [values, setValues]= useState({
     

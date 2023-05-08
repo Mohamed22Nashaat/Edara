@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
 import navLinks from '../../assets/book.data/navlinks';
 import "./SideBar.css";
 import { removeAuthUser, getAuthUser } from "../../helper/Storage";
 import { useNavigate, } from "react-router-dom";
 import HistoryUser from './../../pages/HistoryUser';
+import axios from 'axios';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -27,6 +28,17 @@ function handleWarehouse(e) {
   window.location.reload();
 };
 
+const [data, setData]= useState([])
+    useEffect(()=>{
+        axios.get('/request',{
+            headers:{
+                token: auth.token
+            } 
+        })
+        .then(res => setData(res.data))
+        .catch(err => console.log(err));
+
+        },[]);
   return (
     <div className="sidebar">
       <div className="sidebar_top">
@@ -165,12 +177,14 @@ function handleWarehouse(e) {
                   <i className="ri-settings-2-line"></i>
                   "Requests"
 
-                  
+                  {data[0] && data[0].status === 'pending' &&(
+                    <span className='notification'>
+                      <i class="ri-notification-3-line"></i>
+                      <span className='badge-r'></span>
+                    </span>
+                  )} 
 
-                  <span className='notification'>
-            <i class="ri-notification-3-line"></i>
-            <span className='badge-r'></span>
-            </span>
+                  
                 </NavLink>
               </li>
             )}

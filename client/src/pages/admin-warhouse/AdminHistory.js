@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../style/AdminHistory.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAuthUser } from '../../helper/Storage';
 import axios from 'axios';
 
@@ -10,7 +10,10 @@ const AdminHistory = () =>{
     const [data, setData]= useState([]);
     const {warehouseID} = useParams();
     const user = getAuthUser();
-
+    const navigate = useNavigate();
+  
+    
+    
     useEffect(()=>{
         axios.get('/request/warehouseRequests/'+warehouseID,{
             headers:{

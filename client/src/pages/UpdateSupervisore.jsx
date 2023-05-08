@@ -10,28 +10,26 @@ function UpdateSupervisore  () {
   const user = getAuthUser();
   const navigate = useNavigate();
 
-  if(user && user.role == 'admin'){
-    navigate('/');
-  }
   
-  useEffect(()=>{
-    axios.get(
-      '/users/'+id ,
-      {
-        headers: {
-          'token': user.token
-      }
-    }).then(res => {
-      console.log(res)
-    setValues({...values, 
-      name: res.data[0].name, 
-      warehouseID: res.data[0].warehouseID, 
-      phone: res.data[0].phone ,
-      status: res.data[0].status
-      })
-    })
-    .catch(err => console.log(err))
-  },[])
+  
+  // useEffect(()=>{
+  //   axios.get(
+  //     '/users/'+id ,
+  //     {
+  //       headers: {
+  //         'token': user.token
+  //     }
+  //   }).then(res => {
+  //     console.log(res)
+  //   setValues({...values, 
+  //     name: res.data[0].name, 
+  //     warehouseID: res.data[0].warehouseID, 
+  //     phone: res.data[0].phone ,
+  //     status: res.data[0].status
+  //     })
+  //   })
+  //   .catch(err => console.log(err))
+  // },[])
           
   const [values, setValues]= useState({
     
@@ -42,7 +40,11 @@ function UpdateSupervisore  () {
     })
     
 
-
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      const v = {}
+      setValues ({ ...values, [name]: value });
+      };
 
   const submit =(event)=>{
     event.preventDefault();
@@ -61,18 +63,7 @@ function UpdateSupervisore  () {
         
   }
 
-  const handleInputChange =(event)=>{
-    const { id } = event.target;
-    event.preventDefault();
-    axios.delete(
-          '/users/'+id,
-          values,
-          ).then(res => {
-              console.log(res);
-              navigate('/homess')
-          //.catch(err => console.log(err))
-          }).catch(err => console.log(err))
-  }
+  
 
   return(
 
@@ -85,23 +76,23 @@ function UpdateSupervisore  () {
             <form onSubmit={submit}>
 
               <div>
-                <input className='input'  type='text' placeholder='Enter Name'  name='name' required value={values.name}  
-                  onChange={e=> setValues({...values, name : e.target.value})}/> 
+                <input className='input'  type='text' placeholder='Enter Name'  name='name' value={values.name}  
+                  onChange={handleInputChange}/>
               </div>
 
               <div>
-              <input className='input' type='text'  placeholder='Enter Phone' name='phone' required value={values.phone} 
-              onChange={e=> setValues({...values, email : e.target.value})}/>
+              <input className='input' type='text'  placeholder='Enter Phone' name='phone' value={values.phone} 
+              onChange={handleInputChange}/>
               </div>
 
               <div>
-                <input className='input' type='text'  placeholder='Enter warehouse ID' name='warehouseID' required value={values.warehouseID} 
-                  onChange={e=> setValues({...values, phone : e.target.value})}/>
+                <input className='input' type='text'  placeholder='Enter warehouse ID' name='warehouseID' value={values.warehouseID} 
+                  onChange={handleInputChange}/>
               </div>
 
               <div>
-                <input className='input' type='text'  placeholder='Enter status' name='status' required value={values.status}
-                onChange={e=> setValues({...values, status : e.target.value})}/>
+                <input className='input' type='text'  placeholder='Enter status' name='status' value={values.status}
+                onChange={handleInputChange}/>
               </div>
 
               <button type='submit' >Save </button>

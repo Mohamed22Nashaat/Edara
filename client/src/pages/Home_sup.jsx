@@ -9,9 +9,7 @@ function Home_sup() {
     const userLocal = getAuthUser();
     const navigate = useNavigate();
   
-    if(!userLocal || userLocal.role !== 'admin'){
-      navigate('/');
-    }
+    
 
     const [data, setData]= useState([])
     useEffect(()=>{

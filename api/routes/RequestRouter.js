@@ -30,7 +30,7 @@ router.post("/",
         };   
 
         const productStock = await query('SELECT * FROM `products` WHERE id = ?', request.productID);
-        if(productStock[0].stock < request.quantity ) return res.status(400).json({msg: "insufficient stock"}); 
+        if(productStock[0].stock < request.quantity * -1 ) return res.status(400).json({msg: "insufficient stock"}); 
 
         await query('INSERT INTO `requests` SET ?', request);
         res.status(200).json({msg: "request created"});
@@ -156,7 +156,7 @@ router.get("/",
         async (req, res)=>{
     try{
         const query = util.promisify(conn.query).bind(conn);
-        const requests = await query('SELECT * FROM `requests` ');
+        const requests = await query('SELECT * FROM `requests` ORDER BY `status` DESC');
 
         res.status(200).json(requests);
     }catch(err){
@@ -165,5 +165,17 @@ router.get("/",
     }
 });
     
+router.get("/checkPending",
+        async (req, res)=>{
+    try{
+        const query = util.promisify(conn.query).bind(conn);
+        const requests = await query("SELECT * FROM `requests` WHERE status = 'pending' ");
+
+        res.status(200).json(requests[0]);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({err: err});
+    }
+});
 
 module.exports = router;

@@ -1,9 +1,14 @@
 import React from "react";
 import '../style/AdminProductCard.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuthUser } from "../../helper/Storage";
 
  const AdminProductCard = (props) =>{
     // {'/assets/products/'+props.image} 
+    const user = getAuthUser();
+    const navigate = useNavigate();
+  
+   
     return(
         <div className="stephen-king-admin-product-card">
             <div className="stephen-king-admin-product-card-image">

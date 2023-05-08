@@ -9,9 +9,7 @@ function  History() {
     const user = getAuthUser();
     const navigate = useNavigate();
   
-    if(!user || user.role !== 'admin'){
-      navigate('/');
-    }
+   
     
     const [data, setData]= useState([])
     useEffect(()=>{

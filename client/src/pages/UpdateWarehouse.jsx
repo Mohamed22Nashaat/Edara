@@ -9,10 +9,6 @@ const UpdateWarehouse  = () =>{
 
   const user = getAuthUser();
   const navigate = useNavigate();
-  
-  if(!user || user.role !== 'admin'){
-    navigate('/');
-  }
 
   const {id} = useParams(); 
   const [values, setValues]= useState({
@@ -22,17 +18,7 @@ const UpdateWarehouse  = () =>{
     supervisorID:""
   });
 
-  useEffect(()=>{
-        axios.get(
-            '/warehouse/'+id,{
-            headers: {
-                "token": user.token
-            }
-        })
-        .then(res => setValues(res.data))
-        .catch(err => console.log(err));
 
-},[])
 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
@@ -48,9 +34,7 @@ const submit =(event)=>{
     values ,
     {headers: {
         'token': user.token
-      },
-      body:
-        values
+      }
       
       
     })
@@ -75,19 +59,19 @@ console.log(values);
 
               <form onSubmit={(e)=>submit(e)}>
                 <div>
-                  <input className='input'  type='text' placeholder='Enter Name'  name='name' required value={values.name}  onChange={handleInputChange } />
+                  <input className='input'  type='text' placeholder='Enter Name'  name='name' value={values.name}  onChange={handleInputChange } />
                 </div>
 
                 <div>
-                  <input className='input' type='text'  placeholder='Enter Location' name='location' required value={values.location} onChange={handleInputChange }/>
+                  <input className='input' type='text'  placeholder='Enter Location' name='location' value={values.location} onChange={handleInputChange }/>
                 </div>
 
                 <div>
-                  <input className='input' type='text'  placeholder='Enter Status' name='status' required value={values.status} onChange={handleInputChange }/>
+                  <input className='input' type='text'  placeholder='Enter Status' name='status' value={values.status} onChange={handleInputChange }/>
                 </div>
                 
                 <div>
-                  <input className='input' type='text'  placeholder='Enter supervisorID' name='supervisorID' required value={values.supervisorID} onChange={handleInputChange }/>
+                  <input className='input' type='text'  placeholder='Enter supervisorID' name='supervisorID' value={values.supervisorID} onChange={handleInputChange }/>
                 </div>
                 <button type='submit'>Update</button>
                 <input className='reset' type="reset" value={"Reset"}/>

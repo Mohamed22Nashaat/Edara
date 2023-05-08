@@ -1,11 +1,16 @@
 import React, { useRef} from 'react';
 import '../style/OperateProduct.css';
 import { useState } from 'react';
+import { getAuthUser } from '../../helper/Storage';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const EditProduct = () =>{
-
+    const user = getAuthUser();
+    const navigate = useNavigate();
+    
+    
 
     const [image, setImage]= useState("");
     const [title, setTitle]= useState("");

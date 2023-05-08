@@ -11,9 +11,9 @@ const NewWarehouse  = () =>{
 
   const user = getAuthUser();
 
-  if(user && user.role == 'admin'){
-    navigate('/');
-  }
+  // if(user && user.role == 'admin'){
+  //   navigate('/');
+  // }
 
   const [values, setValues]= useState({
     

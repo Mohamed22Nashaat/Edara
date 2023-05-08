@@ -28,7 +28,7 @@ router.post("/",
         res.status(200).json(product);
 
     }catch(err){
-        fs.unlinkSync('./public/' + req.file.filename);
+        fs.unlinkSync('../client/src/assets/products/' + req.file.filename);
         console.log(err);
         res.status(500).json({err: err});
     }
@@ -49,7 +49,7 @@ router.put("/:id",
 
         res.status(200).json(updatedInfo);
     }catch(err){
-        fs.unlinkSync('./public/' + req.file.filename);
+        fs.unlinkSync('../client/src/assets/products/' + req.file.filename);
         console.log(err);
         res.status(500).json({err: err});
     }
@@ -64,7 +64,7 @@ router.delete("/:id",
 
         if(!product[0]) return res.status(404).json({msg: "product not found"});
 
-        fs.unlinkSync('./public/' + product[0].image);
+        fs.unlinkSync('../client/src/assets/products/' + product[0].image);
         await query('DELETE FROM `products` WHERE `id` = ?', product[0].id);
 
         res.status(200).json({msg: "product deleted"});
