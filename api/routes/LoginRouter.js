@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const {body, validationResult} = require("express-validator");
+const util = require ("util");
+const bcrypt =require("bcrypt");
+const conn = require ("../db/dbConnection");
 
 const User = require ('../models/user');
 
@@ -18,7 +21,7 @@ router.post("/",
     let userModel = new User();
     let user = await userModel.Login(req.body.email, req.body.password);
 
-    if(user.err) return res.status(404).json(user);
+    if(user.errors) return res.status(404).json(user);
     
     res.header("token", user.token);
     res.status(200).json(user);

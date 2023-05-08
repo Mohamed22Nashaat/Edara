@@ -13,16 +13,12 @@ module.exports = class User{
         /* check Existance*/
         const user = await query ("SELECT * FROM users WHERE email = ? ",email);
         if(user.length == 0) 
-            return {
-                err: "not correct email or password !" 
-                };
+            return {errors: [{msg: "not correct email or password !"}]};
 
         /* check Password*/
         const checkpassword = await bcrypt.compare(password, user[0].password);
         if(!checkpassword) 
-            return {
-                err: "not correct email or password !" 
-            };
+            return {errors: [{msg: "not correct email or password !"}]};
 
         delete user[0].password;
         return user[0];
