@@ -55,9 +55,9 @@ function  History() {
     }
 
     return(
-        <div className='all-history'>
+        <div className='all-historyy'>
            <h1>Request</h1>
-           <div className='all-history-table'>
+           <div className='all-history-tablee'>
             <table>
                 <thead>
                     <tr >

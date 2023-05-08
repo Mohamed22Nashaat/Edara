@@ -31,6 +31,7 @@ const warehouse = {
 
 const Dashboard = () => {
   return (
+    
     <div className="dashboard">
       <div className="dashboard_wrapper">
         <div className="dashboard_cards">
@@ -62,6 +63,7 @@ const Dashboard = () => {
           </div> */}
       </div>
     </div>
+    
   )
 }
 

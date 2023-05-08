@@ -3,12 +3,17 @@ import Router from '../../routes/Router';
 import SideBar from '../SideBar/SideBar'; 
 import TopNav from '../TopNav/TopNav';
 
+  import { getAuthUser } from '../../helper/Storage';
+const auth = getAuthUser () ;
+
 const Layout = () => {
   return (
     <div className="Layout">
-      <SideBar/>
+      {auth && (<SideBar/>)}
+      
       <div className="main_layout">
-        <TopNav/>
+      {auth && (<TopNav/>)}
+        
         <div className="content">
           <Router/>
         </div>
