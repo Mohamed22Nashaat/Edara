@@ -2,13 +2,27 @@ import React from "react";
 import '../style/AdminProductCard.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuthUser } from "../../helper/Storage";
+import axios from "axios";
 
  const AdminProductCard = (props) =>{
     // {'/assets/products/'+props.image} 
     const user = getAuthUser();
     const navigate = useNavigate();
   
-   
+    const handleDelete = (id) => {
+        axios.delete('/products/'+id,
+        {
+            headers:{
+                'token': getAuthUser().token
+            }
+        })
+        .then(res => {
+            console.log(res)
+            window.location.reload();
+        })
+        .catch(err => console.log(err));
+   }
+
     return(
         <div className="stephen-king-admin-product-card">
             <div className="stephen-king-admin-product-card-image">
@@ -23,9 +37,8 @@ import { getAuthUser } from "../../helper/Storage";
                 <div className="stephen-king-admin-product-card-operation">
 
                     <h3 style={{margin:"5px"}} >Quantity = {props.quantity}</h3>
-                   <button className="stephen-king-admin-product-card-delete" >Delete </button>
-        
-                   <Link to={'/edit'} className='stephen-king-admin-product-card-edit'>Edit</Link>
+                   <button onClick={()=>handleDelete(props.productID)} className="stephen-king-admin-product-card-delete"> Delete </button>
+                   <Link to={`/UpdateProduct/${props.productID}`} className="stephen-king-admin-product-card-edit"> Edit </Link>
 
 
                 </div>

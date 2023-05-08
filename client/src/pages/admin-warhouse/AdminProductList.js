@@ -55,6 +55,7 @@ const AdminProductList = () =>{
                 
                  <AdminProductCard
                 key={item.id}
+                productID={item.id}
                 name={item.name}
                 desc={item.description}
                 img={item.image}
@@ -70,7 +71,6 @@ const AdminProductList = () =>{
 return(
     <>
     <AdminHistoryButton/>
-    <AdminAddButton/>
     <div className="stephen-king-admin-product-list">{displayBooks()}</div>
     <AdminHistory/>
    </>

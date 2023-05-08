@@ -19,7 +19,7 @@ module.exports = class Product{
         
         const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?', productInfo.warehouseID);
         if(!checkWarehouse[0]){
-            fs.unlinkSync('../client/src/assets/products/' + productInfo.file.filename);
+            fs.unlinkSync('./upload/' + productInfo.file.filename);
             return {
                 err: "Warehouse Doesn't Exist.."
             };
@@ -43,7 +43,7 @@ module.exports = class Product{
 
         if(!product[0]) {
             if(newInfo.file)
-                fs.unlinkSync('../client/src/assets/products/' + newInfo.file.filename);
+                fs.unlinkSync('./upload/' + newInfo.file.filename);
             return {
                 msg: "product not found"
             };
@@ -53,7 +53,7 @@ module.exports = class Product{
             let warehouseCheck = await query('SELECT * FROM `warehouses` WHERE id = ?', newInfo.warehouseID);
             if(!warehouseCheck[0]) {
                 if(newInfo.file)
-                    fs.unlinkSync('../client/src/assets/products/' + newInfo.file.filename);
+                    fs.unlinkSync('./upload/' + newInfo.file.filename);
                 return {
                     msg: "warehouse not found"
                 };
@@ -64,7 +64,7 @@ module.exports = class Product{
         let imageNew;
         if(newInfo.file){
             imageNew = newInfo.file.filename ;
-            fs.unlinkSync('../client/src/assets/products/' + product[0].image);
+            fs.unlinkSync('./upload/' + product[0].image);
         }else{
             imageNew = product[0].image;
         }
