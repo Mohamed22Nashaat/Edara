@@ -165,6 +165,8 @@ function handleWarehouse(e) {
                   <i className="ri-settings-2-line"></i>
                   "Requests"
 
+                  
+
                   <span className='notification'>
             <i class="ri-notification-3-line"></i>
             <span className='badge-r'></span>

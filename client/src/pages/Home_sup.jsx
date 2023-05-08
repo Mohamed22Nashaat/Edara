@@ -1,12 +1,17 @@
 import React, {useEffect, useState, alert} from "react";
 import Table from 'react-bootstrap/Table';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../style/homess.css';
 import {getAuthUser} from '../helper/Storage';
 import axios from 'axios';
 
 function Home_sup() {
     const userLocal = getAuthUser();
+    const navigate = useNavigate();
+  
+    if(!userLocal || userLocal.role !== 'admin'){
+      navigate('/');
+    }
 
     const [data, setData]= useState([])
     useEffect(()=>{

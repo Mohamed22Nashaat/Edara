@@ -3,10 +3,16 @@ import axios from 'axios';
 import { getAuthUser } from '../helper/Storage';
 import'../style/History.css'
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function  History() {
     const user = getAuthUser();
-
+    const navigate = useNavigate();
+  
+    if(!user || user.role !== 'admin'){
+      navigate('/');
+    }
+    
     const [data, setData]= useState([])
     useEffect(()=>{
         axios.get('/request',{

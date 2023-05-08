@@ -9,6 +9,10 @@ const UpdateProduct  = () =>{
   const user = getAuthUser();
   const navigate = useNavigate();
 
+  if(user && user.role == 'admin'){
+    navigate('/');
+  }
+  
   const [formData, setFormData]= useState({
     name :"",
     stock : "",

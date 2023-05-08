@@ -3,11 +3,18 @@ import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import { getAuthUser } from "../helper/Storage";
 
+
 // update warehouse
 const UpdateWarehouse  = () =>{
 
-  const {id} = useParams(); 
   const user = getAuthUser();
+  const navigate = useNavigate();
+  
+  if(!user || user.role !== 'admin'){
+    navigate('/');
+  }
+
+  const {id} = useParams(); 
   const [values, setValues]= useState({
     name :"",
     location : "",
@@ -27,15 +34,11 @@ const UpdateWarehouse  = () =>{
 
 },[])
 
-
 const handleInputChange = (event) => {
   const { name, value } = event.target;
   const v = {}
   setValues ({ ...values, [name]: value });
   };
-
-
-const navigate = useNavigate();
 
 const submit =(event)=>{
   event.preventDefault();

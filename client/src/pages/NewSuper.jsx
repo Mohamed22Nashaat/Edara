@@ -8,7 +8,11 @@ import { getAuthUser } from '../helper/Storage';
 //add supervisor
 const NewSuper  = () =>{
   const user = getAuthUser();
-
+  const navigate = useNavigate();
+  
+  if(!user || user.role !== 'admin'){
+    navigate('/');
+  }
 
   const [values, setValues]= useState({
     
@@ -24,9 +28,6 @@ const handleInputChange = (event) => {
   const v = {}
   setValues ({ ...values, [name]: value });
 };
-
-
-const navigate = useNavigate();
 
 const submit =(event)=>{
   event.preventDefault();

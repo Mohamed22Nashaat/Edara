@@ -8,7 +8,12 @@ import { getAuthUser } from '../helper/Storage';
 function UpdateSupervisore  () {
   const {id} = useParams();
   const user = getAuthUser();
+  const navigate = useNavigate();
 
+  if(user && user.role == 'admin'){
+    navigate('/');
+  }
+  
   useEffect(()=>{
     axios.get(
       '/users/'+id ,
@@ -38,7 +43,6 @@ function UpdateSupervisore  () {
     
 
 
-const navigate = useNavigate();
 
   const submit =(event)=>{
     event.preventDefault();

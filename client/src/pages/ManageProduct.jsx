@@ -1,11 +1,19 @@
 import React, {useEffect, useState, alert} from "react";
 import Table from 'react-bootstrap/Table';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { getAuthUser } from "../helper/Storage";
 
 function ManageProduct() {
     const [data, setData]= useState([])
+
+    const user = getAuthUser();
+    const navigate = useNavigate();
+    
+    if(!user || user.role !== 'admin'){
+      navigate('/');
+    }
+
     useEffect(()=>{
         axios.get('/products',
         {

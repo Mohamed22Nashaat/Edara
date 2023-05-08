@@ -9,7 +9,11 @@ const NewWarehouse  = () =>{
 
   const navigate = useNavigate();
 
-  const [user , setuser] = useState(getAuthUser())
+  const user = getAuthUser();
+
+  if(user && user.role == 'admin'){
+    navigate('/');
+  }
 
   const [values, setValues]= useState({
     
