@@ -18,26 +18,24 @@ function UpdateSupervisore  () {
       }
     }).then(res => {
       console.log(res)
-    setValues({...values, name: res.data[0].name, email: res.data[0].email, phone: res.data[0].phone ,
+    setValues({...values, 
+      name: res.data[0].name, 
+      warehouseID: res.data[0].warehouseID, 
+      phone: res.data[0].phone ,
       status: res.data[0].status
       })
     })
     .catch(err => console.log(err))
-          },[])
+  },[])
           
   const [values, setValues]= useState({
     
     name: '',
-    // email: '',
+    warehouseID: '',
     phone: '',
     status: ''
     })
     
-
- //const handleInputChange = (event) => {
-  //const { name, value } = event.target;
-  //setValues ({ ...values, [name]: value });
-
 
 
 const navigate = useNavigate();
@@ -54,7 +52,6 @@ const navigate = useNavigate();
           .then(res => {
               console.log(res);
               navigate('/homess')
-          //.catch(err => console.log(err))
       })
       .catch(err => console.log(err))
         
@@ -88,13 +85,13 @@ const navigate = useNavigate();
                   onChange={e=> setValues({...values, name : e.target.value})}/> 
               </div>
 
-              {/* <div>
-              <input className='input' type='text'  placeholder='Enter Email' name='email' required value={values.email} 
+              <div>
+              <input className='input' type='text'  placeholder='Enter Phone' name='phone' required value={values.phone} 
               onChange={e=> setValues({...values, email : e.target.value})}/>
-              </div> */}
+              </div>
 
               <div>
-                <input className='input' type='text'  placeholder='Enter Phone' name='phone' required value={values.phone} 
+                <input className='input' type='text'  placeholder='Enter warehouse ID' name='warehouseID' required value={values.warehouseID} 
                   onChange={e=> setValues({...values, phone : e.target.value})}/>
               </div>
 

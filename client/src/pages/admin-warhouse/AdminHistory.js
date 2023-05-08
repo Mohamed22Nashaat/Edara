@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/AdminHistory.css'
+import { useParams } from 'react-router-dom';
+import { getAuthUser } from '../../helper/Storage';
+import axios from 'axios';
 
 
 const AdminHistory = () =>{
+
+    const [data, setData]= useState([]);
+    const {warehouseID} = useParams();
+    const user = getAuthUser();
+
+    useEffect(()=>{
+        axios.get('/request/warehouseRequests/'+warehouseID,{
+            headers:{
+                'token': user.token
+            } 
+        })
+        .then(res => setData(res.data))
+        .catch(err => console.log(err));
+
+        },[])
     return(
         <div className='stephen-king-history'>
            <h2 id='stephen-history'>History</h2>
            <div className='stephen-king-history-table'>
             <table>
                 <thead>
-                    <tr >
-                        
-                        <td>Type</td>
-                        <td>Date</td>
-                        <td>Book Title</td>
-                        <td>Quantity</td>
+                    <tr>
+                        <td>Product ID</td>
+                        <td>quantity</td>
+                        <td>Warehouse ID</td>
+                        <td>User ID</td>
+                        <td>Status</td>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                {data.map((request, index) =>{
+                    return<tr key={index}>
+                        <td> {request.productID}</td>
+                        <td> {request.quantity}</td>
+                        <td> {request.warehouseID}</td>
+                        <td> {request.userID}</td>
+                        <td> {request.status}</td>
+                    </tr>
+                    })}
                 </tbody>
             </table>
 

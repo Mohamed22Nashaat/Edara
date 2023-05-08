@@ -21,13 +21,17 @@ router.post("/",
         
         const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?',req.body.warehouseID);
         if(!checkWarehouse[0] || checkWarehouse[0].status != 'active') return res.status(404).json({msg: "Warehouse not found"});
-
+        
         const request = {
             productID: req.body.productID,
             quantity: req.body.quantity,
             userID: req.body.userID,
             warehouseID: req.body.warehouseID,
-        };    
+        };   
+
+        const productStock = await query('SELECT * FROM `products` WHERE id = ?', request.productID);
+        if(productStock[0].stock < request.quantity ) return res.status(400).json({msg: "insufficient stock"}); 
+
         await query('INSERT INTO `requests` SET ?', request);
         res.status(200).json({msg: "request created"});
 
@@ -61,7 +65,7 @@ router.put("/:id",
         if(req.body.status == 'accepted'){
             const product = await query('SELECT * FROM products WHERE id = ?',productIDNew)
             const stockNew = Number(product[0].stock) + quantityNew
-            await query('UPDATE products SET stock = ?',stockNew);
+            await query('UPDATE products SET stock = ? WHERE id = ?',[stockNew, productIDNew]);
         }
 
         await query('UPDATE `requests` SET ? WHERE `id` = ?',[requestNew, request[0].id]);
@@ -93,7 +97,7 @@ router.get("/",
         async(req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
-        const requests = await query('SELECT * FROM `requests`');
+        const requests = await query('SELECT * FROM `requests` ORDER BY `status` DESC');
         res.status(200).json(requests);
     }catch(err){
         console.log(err);

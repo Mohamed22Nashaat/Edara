@@ -147,7 +147,7 @@ const Sidebar = () => {
                 <NavLink
                   to={"/history"}>
                   <i className="ri-settings-2-line"></i>
-                  "History"
+                  "Requests"
                 </NavLink>
               </li>
             )}

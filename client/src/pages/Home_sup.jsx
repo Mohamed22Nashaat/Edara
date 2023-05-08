@@ -45,6 +45,7 @@ function Home_sup() {
                         <th> name</th>
                         <th> email</th>
                         <th> Phone</th>
+                        <th> warehouseID</th>
                         <th> status</th>
                         <th> actions</th>
                     </tr>
@@ -55,7 +56,8 @@ function Home_sup() {
                             <td> {users.id}</td>
                             <td> {users.name}</td>
                             <td> {users.email}</td>
-                            <td> {users.Phone}</td>
+                            <td> {users.phone}</td>
+                            <td> {users.warehouseID}</td>
                             <td> {users.status}</td>
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>

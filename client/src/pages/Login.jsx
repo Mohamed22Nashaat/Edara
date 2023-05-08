@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
       })
       .then((resp) => {
         setLogin({ ...login, loading: false, err: [] });
+        console.log(resp.data);
         setAuthUser(resp.data);
         navigate("/dashboard");
         window.location.reload()

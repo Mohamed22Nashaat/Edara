@@ -16,7 +16,8 @@ const AdminProductList = () =>{
     const {warehouseID} = useParams();
     const user = getAuthUser();
 
-    const [data, setData]= useState([])
+    const [data, setData]= useState([]);
+    const [history, setHistory]= useState([]);
     useEffect(()=>{
         axios.get('/products/warehouseProducts/'+warehouseID,{
             headers:{
@@ -24,6 +25,17 @@ const AdminProductList = () =>{
             } 
         })
         .then(res => setData(res.data))
+        .catch(err => console.log(err));
+
+        },[])
+
+    useEffect(()=>{
+        axios.get('/request/warehouseRequests/'+warehouseID,{
+            headers:{
+                'token': user.token
+            } 
+        })
+        .then(res => setHistory(res.history))
         .catch(err => console.log(err));
 
         },[])

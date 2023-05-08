@@ -42,26 +42,28 @@ function ManageWarehouse() {
             <Table striped bordered hover size="sm" >
                 <thead>
                     <tr >
-                        <th>id</th>
+                        <th> id</th>
                         <th> name</th>
                         <th> location</th>
                         <th> status</th>
+                        <th> supervisor ID</th>
                         <th> actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {data.map((users, index) =>{
+                {data.map((warehouse, index) =>{
                         return<tr key={index}>
-                            <td> {users.id}</td>
-                            <td> {users.name}</td>
-                            <td> {users.location}</td>
-                            <td> {users.status}</td>
+                            <td> {warehouse.id}</td>
+                            <td> {warehouse.name}</td>
+                            <td> {warehouse.location}</td>
+                            <td> {warehouse.status}</td>
+                            <td> {warehouse.supervisorID}</td>
                             <td>
-                                <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
-                <Link to={`/UpdateWarehouse/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
-                <Link to={`/AdminProductList/${users.id}`} className="btn btn-sm btn-danger"> view </Link>
-                </td>
-                </tr>
+                                <button onClick={()=>handleDelete(warehouse.id)} className="btn btn-sm btn-danger"> Delete </button>
+                                <Link to={`/UpdateWarehouse/${warehouse.id}`} className="btn btn-sm btn-danger"> update </Link>
+                                <Link to={`/AdminProductList/${warehouse.id}`} className="btn btn-sm btn-danger"> view </Link>
+                            </td>
+                        </tr>
                     })}
                 </tbody>
             </Table>

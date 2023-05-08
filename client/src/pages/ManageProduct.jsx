@@ -17,20 +17,20 @@ function ManageProduct() {
         .catch(err => console.log(err));
 
 },[])
-   const handleDelete = (id) => {
-    axios.delete('/products/'+id,
-    {
-        headers:{
-            'token': getAuthUser().token
-        }
-    })
-    .then(res => {
-        console.log(res)
-        window.location.reload();
-    })
-    .catch(err => console.log(err));
-
+    const handleDelete = (id) => {
+        axios.delete('/products/'+id,
+        {
+            headers:{
+                'token': getAuthUser().token
+            }
+        })
+        .then(res => {
+            console.log(res)
+            window.location.reload();
+        })
+        .catch(err => console.log(err));
    }
+   
       return (
               <div className="style-home">
        <div className="header">
@@ -52,7 +52,7 @@ function ManageProduct() {
                 </thead>
                 <tbody>
                 {data.map((users, index) =>{
-                        return<tr key={index}>
+                        return <tr key={index}>
                             <td> {users.id}</td>
                             <td> {users.name}</td>
                             <td> {users.stock}</td>
@@ -61,9 +61,9 @@ function ManageProduct() {
                             <td> {users.warehouseID}</td>
                             <td>
                                 <button onClick={()=>handleDelete(users.id)} className="btn btn-sm btn-danger"> Delete </button>
-                <Link to={`/UpdateProduct/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
-                </td>
-                </tr>
+                                <Link to={`/UpdateProduct/${users.id}`} className="btn btn-sm btn-danger"> update </Link>
+                            </td>
+                        </tr>
                     })}
                 </tbody>
             </Table>
