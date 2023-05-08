@@ -7,26 +7,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 function  HistoryUser() {
-    const navigator = useNavigate();
+    const navigate = useNavigate();
     const user = getAuthUser();
+
+    
+
     const {where, id} = useParams();
     const [data, setData]= useState([])
-    const [shouldReload, setShouldReload] = useState(false);
-
-  useEffect(() => {
-    const reload = localStorage.getItem('reload');
-    if (reload === true) {
-        console.log('5');
-        window.location.reload();
-        localStorage.setItem('reload', false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (shouldReload) {
-      window.location.reload();
-    }
-  }, [shouldReload]);
 
     useEffect(()=>{
         

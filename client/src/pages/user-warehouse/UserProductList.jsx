@@ -3,7 +3,7 @@ import UserProductCard from "./UserProductCard";
 import UserHistoryButton from "./UserHistoryButton";
 import UserHistory from "./UserHistory";
 import './style/UserProductList.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAuthUser } from "../../helper/Storage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,6 +13,9 @@ const UserProductList = () =>{
 
     const {warehouseID} = useParams();
     const user = getAuthUser();
+    const navigate = useNavigate();
+  
+    
 
     const [data, setData]= useState([])
     useEffect(()=>{

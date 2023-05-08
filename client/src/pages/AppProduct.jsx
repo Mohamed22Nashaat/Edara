@@ -9,6 +9,7 @@ const AppProduct  = () =>{
   const user = getAuthUser();
   const navigate = useNavigate();
 
+  
   const [formData, setFormData]= useState({
       name :"",
       stock : "",
