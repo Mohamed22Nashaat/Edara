@@ -12,6 +12,7 @@ const Sidebar = () => {
   const logout = () => {
     removeAuthUser();
     navigate("/Login");
+    window.location.reload();
   };
 
 function handleUser(e) {
@@ -48,10 +49,6 @@ function handleWarehouse(e) {
                   <i className="ri-settings-2-line"></i>
                   "Login"
 
-                  
-                  
-            
-
                 </NavLink>
               </li>
             )
@@ -86,7 +83,7 @@ function handleWarehouse(e) {
             )} */}
 
             
-{auth && auth.role === "user" && (
+            {auth && auth.role === "user" && (
               <li className='nav_item' >
                 <NavLink
                   to={"/UserProductList/"+getAuthUser().warehouseID}>

@@ -40,6 +40,7 @@ const UserProductList = () =>{
 
                  <UserProductCard
                 key={item.id}
+                productID={item.id}
                 name={item.name}
                 desc={item.description}
                 img={item.image}

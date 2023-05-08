@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
-import { setAuthUser, removeAuthUser } from "../helper/Storage";
+import { setAuthUser, removeAuthUser, getAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
 
 //login
@@ -28,7 +28,11 @@ import { useNavigate } from "react-router-dom";
         setLogin({ ...login, loading: false, err: [] });
         console.log(resp.data);
         setAuthUser(resp.data);
-        navigate("/dashboard");
+        if(getAuthUser().role == 'user')
+          navigate("/UserProductList/"+getAuthUser().warehouseID);
+        if(getAuthUser().role == 'admin')
+          navigate("/dashboard");
+
         window.location.reload()
       })
       .catch((errors) => {

@@ -8,7 +8,7 @@ const conn = require ("../db/dbConnection");
 
 // authorize [CREATE, UPDATE, DELETE, LIST]
 router.post("/", 
-        authorize,
+        authenticate,
         async (req, res) =>{
     try{
         const query = util.promisify(conn.query).bind(conn);
@@ -113,7 +113,7 @@ router.get("/userRequests/:id",
         const checkUser = await query('SELECT * FROM users WHERE id = ?',req.params.id); 
         if(!checkUser[0]) return res.status(404).json({msg: "User not found"});
     
-        const requests = await query('SELECT * FROM `requests` WHERE userID = ?',req.params.id);
+        const requests = await query('SELECT * FROM `requests` WHERE userID = ? ORDER BY `status` DESC',req.params.id);
         res.status(200).json(requests);
     }catch(err){
         console.log(err);
@@ -129,7 +129,7 @@ router.get("/warehouseRequests/:id",
         const checkWarehouse = await query('SELECT * FROM warehouses WHERE id = ?',req.params.id); 
         if(!checkWarehouse[0]) return res.status(404).json({msg: "Warehouse not found"});
         
-        const requests = await query('SELECT * FROM `requests` WHERE warehouseID = ?',req.params.id);
+        const requests = await query('SELECT * FROM `requests` WHERE warehouseID = ? ORDER BY `status` DESC',req.params.id);
         res.status(200).json(requests);
     }catch(err){
         console.log(err);

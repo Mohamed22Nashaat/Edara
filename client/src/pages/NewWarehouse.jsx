@@ -7,6 +7,9 @@ import { getAuthUser } from "../helper/Storage";
 //new warehouse
 const NewWarehouse  = () =>{
 
+  const navigate = useNavigate();
+
+  const [user , setuser] = useState(getAuthUser())
 
   const [values, setValues]= useState({
     
@@ -15,8 +18,6 @@ const NewWarehouse  = () =>{
     
 })
 
-const [user , setuser] = useState(getAuthUser())
-console.log(user) 
 const handleInputChange = (event) => {
   const { name, value } = event.target;
   const v = {}
@@ -24,7 +25,6 @@ const handleInputChange = (event) => {
   };
 
 
-const navigate = useNavigate();
 
 const submit =(event)=>{
   event.preventDefault();
@@ -34,7 +34,7 @@ const submit =(event)=>{
       values ,
       {
         headers: {
-          'token': user.token
+          token: user.token
         }
       }
       ).then(res => {
