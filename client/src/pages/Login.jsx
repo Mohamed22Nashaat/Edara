@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
-import { setAuthUser } from "../helper/Storage";
+import { setAuthUser, removeAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
 
 //login
  const Login = () => {
+  removeAuthUser();
   const navigate = useNavigate();
     const [login, setLogin] = useState({
       email: "",

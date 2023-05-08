@@ -106,7 +106,7 @@ router.get("/",
 });
 
 router.get("/userRequests/:id",
-        authorize,
+        authenticate,
         async(req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);
@@ -122,7 +122,7 @@ router.get("/userRequests/:id",
 });
 
 router.get("/warehouseRequests/:id",
-        authorize,
+        authenticate,
         async(req, res) => {
     try{
         const query = util.promisify(conn.query).bind(conn);

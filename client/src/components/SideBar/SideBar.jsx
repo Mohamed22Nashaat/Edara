@@ -5,6 +5,7 @@ import "./SideBar.css";
 import { removeAuthUser, getAuthUser } from "../../helper/Storage";
 import { useNavigate, } from "react-router-dom";
 import HistoryUser from './../../pages/HistoryUser';
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const auth = getAuthUser();
@@ -12,6 +13,19 @@ const Sidebar = () => {
     removeAuthUser();
     navigate("/Login");
   };
+
+function handleUser(e) {
+  e.preventDefault();
+  navigate(`/HistoryUser/user/${auth.id}`);
+  window.location.reload();
+};
+
+function handleWarehouse(e) {
+  e.preventDefault();
+  navigate(`/HistoryUser/warehouse/${auth.warehouseID}`);
+  window.location.reload();
+};
+
   return (
     <div className="sidebar">
       <div className="sidebar_top">
@@ -68,7 +82,7 @@ const Sidebar = () => {
 {auth && auth.role === "user" && (
               <li className='nav_item' >
                 <NavLink
-                  to={"/UserProductList"}>
+                  to={"/UserProductList/"+getAuthUser().warehouseID}>
                   <i className="ri-settings-2-line"></i>
                   "Home"
                 </NavLink>
@@ -76,23 +90,21 @@ const Sidebar = () => {
             )}
 
             
- {auth && auth.role === "user" && (
+            {auth && auth.role === "user" && (
               <li className='nav_item' >
-                <NavLink
-                  to={"/HistoryUser"}>
+                <NavLink onClick={(e) => handleWarehouse(e)}>
                   <i className="ri-settings-2-line"></i>
-                  "HistoryUser"
+                  "Warehouse History"
                 </NavLink>
               </li> 
             )}
 
 
-{auth && auth.role === "user" && (
+            {auth && auth.role === "user" && (
               <li className='nav_item' >
-                <NavLink
-                  to={"/HistoryUser"}>
+                <NavLink onClick={(e) => handleUser(e)}>
                   <i className="ri-settings-2-line"></i>
-                  "HistoryUser"
+                  "User History"
                 </NavLink>
               </li>
             )}

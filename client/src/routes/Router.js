@@ -22,7 +22,7 @@ import HistoryUser from '../pages/HistoryUser';
 const Router = () => {
   return(
   <Routes>
-    <Route path='/' element={<Navigate to='/dashboard' element={<Dashboard/>}/>}/>
+    <Route path='/' element={<Navigate to='/Login' element={<Login/>}/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
     <Route path='/NewWarehouse' element={<NewWarehouse/>}/>
     {/* <Route path='/NewWarehouse' element={<NewWarehouse/>}></Route> */}
@@ -43,7 +43,7 @@ const Router = () => {
     <Route path='/ManageProduct' element={<ManageProduct/>}/>
     <Route path='/AppProduct' element={<AppProduct/>}/>
     <Route path='/UpdateProduct/:id' element={<UpdateProduct/>}/>
-    <Route path='/HistoryUser' element={<HistoryUser/>}/>
+    <Route path='/HistoryUser/:where/:id' element={<HistoryUser/>}/>
   
   </Routes>
   )
