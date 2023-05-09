@@ -50,7 +50,6 @@ function ManageProduct() {
                         <th>id</th>
                         <th> name</th>
                         <th> stock</th>
-                        <th> photo</th>
                         <th> description</th>
                         <th> warehouseID</th>
                         <th> actions</th>
@@ -62,7 +61,6 @@ function ManageProduct() {
                             <td> {users.id}</td>
                             <td> {users.name}</td>
                             <td> {users.stock}</td>
-                            <td> {users.image}</td>
                             <td> {users.description}</td>
                             <td> {users.warehouseID}</td>
                             <td>
